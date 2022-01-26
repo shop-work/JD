@@ -33,7 +33,7 @@ func IsPasswordCorrect(username, password string) (bool, error) {
 	return true, err
 }
 
-//判断用户名是否存在
+// IsExistUsername 判断用户名是否存在
 func IsExistUsername(username string) (bool, error) {
 	_, err := dao.SelectUserByUsername(username)
 	if err != nil {
@@ -50,7 +50,7 @@ func ChangePassword(username, newPassword string) error {
 	return err
 }
 
-//验证密码是否合理(可增加密码复杂性)
+// IsPasswordReasonable 验证密码是否合理(可增加密码复杂性)
 func IsPasswordReasonable(password string) bool {
 	if len(password) < 6 {
 		return false
