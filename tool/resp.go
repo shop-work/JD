@@ -12,9 +12,9 @@ import (
 	"net/http"
 )
 
-func RespErrorWithData(ctx *gin.Context,data interface{})  {
-	ctx.JSON(http.StatusOK,gin.H{
-		"info":data,
+func RespErrorWithData(ctx *gin.Context, data interface{}) {
+	ctx.JSON(http.StatusOK, gin.H{
+		"info": data,
 	})
 }
 
@@ -38,7 +38,7 @@ func RespSuccessfulWithData(ctx *gin.Context, data interface{}) {
 }
 
 func RespSensitiveError(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK,gin.H{
-		"data":"含有非法词汇",
+	ctx.JSON(http.StatusOK, gin.H{
+		"data": "含有非法词汇",
 	})
 }
