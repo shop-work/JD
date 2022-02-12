@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的京东</title>
+    <style>
+      .ul1{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow:hidden;
+            background-color: rgb(236, 236, 236);
+        }
+        .li1{
+            float: left;
+        }
+        .li1 a, .drop1-1{
+            display: block;
+            color: rgb(100, 100, 100);
+            text-align: center;
+            padding: 6px 10px 0px 20px;
+            text-decoration: none;
+            font-size: smaller;
+            border-left-color: rgb(100, 100, 100);
+            border-right-color: rgb(100, 100, 100);
+        }
+        .li1 a:hover, .drop1:hover, .drop1-1{
+            color: rgb(216, 11, 11);
+        }
+       .drop1{
+           display: inline-block;  
+       }
+       .drop2{
+           display: inline-block;
+       }
+       .drop3{
+           display:inline-block;
+       }
+       .drop4{
+           display:inline-block;
+       }
+       .drop5{
+           display:inline-block;
+       }
+       .drop6{
+           display:inline-block;
+       }
+       .drop1-1-1{
+           display: none;
+           position: absolute;
+          background-color: white;
+           min-width: 300px;
+           height: 150px;
+           
+           top: 33px;
+           list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow:hidden;
+            box-shadow:0px 10px 10px 0px rgba(0, 0, 0, 0.2) ;
+
+       }
+       .drop2-2-2{
+           display: none;
+           position: absolute;
+          background-color: white;
+           min-width: 1600px;
+           height: 180px;
+           top: 33px;
+           left: 100px;
+           z-index: +999;
+           box-shadow:0px 10px 10px 0px rgba(0, 0, 0, 0.2) ;
+       }
+       .drop3-3-3{
+           display: none;
+           position: absolute;
+          background-color: white;
+           min-width: 80px;
+           height: 80px;
+           top: 33px;
+           left: 1000px;
+           z-index: +999;
+           box-shadow:0px 10px 10px 0px rgba(0, 0, 0, 0.2) ;
+       }
+       .drop4-4-4{
+           display: none;
+           position: absolute;
+          background-color: white;
+           min-width: 80px;
+           height: 180px;
+           top: 90px;
+           left: 450px;
+           z-index: +999;
+           box-shadow:0px 10px 10px 0px rgba(0, 0, 0, 0.2) ;
+           list-style-type: none;
+       }
+       .drop5-5-5{
+           display: none;
+           position: absolute;
+          background-color: white;
+           min-width: 200px;
+           height: 180px;
+           top: 100px;
+           left: 600px;
+           z-index: +999;
+           box-shadow:0px 10px 10px 0px rgba(0, 0, 0, 0.2) ;
+           list-style-type: none;
+       }
+       .drop6-6-6{
+           display: none;
+           position: absolute;
+           z-index: +999;
+           box-shadow:0px 10px 10px 0px rgba(0, 0, 0, 0.2) ;
+           list-style-type: none;
+       }
+       .drop1-1-1 a{
+           color:rgb(100,100,100);
+           text-decoration: none;
+           display: block;
+           background-color:rgb(255, 255, 255);
+           font-size: x-small;
+           position: absolute;
+       }
+       .drop2-2-2 a{
+           color:rgb(100,100,100);
+           text-decoration: none;
+           display: block;
+           background-color:rgb(255, 255, 255);
+           font-size: x-small;
+         position: absolute;
+       }
+       .drop3-3-3 a{
+           color:rgb(100,100,100);
+           text-decoration: none;
+           display: block;
+           background-color:rgb(255, 255, 255);
+           font-size: x-small;
+         position: absolute;
+         
+       }
+       .drop4-4-4 a{
+           color:rgb(59, 59, 59);
+           text-decoration: none;
+           display: block;
+           background-color:rgb(255, 255, 255);
+          font-size: smaller;
+         position: absolute;
+       }
+       .drop5-5-5 a{
+           color:rgb(59, 59, 59);
+           text-decoration: none;
+           display: block;
+           background-color:rgb(255, 255, 255);
+          font-size: smaller;
+         position: absolute;
+       }
+       .drop2-2-2 ul{
+        list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow:hidden;
+            position: absolute; 
+            width: 400px;
+            display:inherit;
+            height: 180px;
+            position: absolute;
+           
+       }
+       .drop2-2-2 span{
+           font-weight: 400; 
+       }
+       .drop2-2-2 li{
+           height: 20px;
+           width: 300px;
+           padding-left: 30px;
+       }
+       .drop1-1-1 a:hover{
+           color:rgb(216, 11, 11);
+         
+       }
+       .drop2-2-2 a:hover{
+           color:rgb(216, 11, 11);
+         
+       }
+       .drop3-3-3 a:hover{
+           color:rgb(216, 11, 11);
+         
+       }
+       .drop4-4-4 a:hover{
+           color:rgb(216, 11, 11);
+         
+       }
+       .drop5-5-5 a:hover{
+           color:rgb(216, 11, 11);
+         
+       }
+       .drop1:hover .drop1-1-1{
+           display: block;
+       }
+       .drop2:hover .drop2-2-2{
+           display: block;
+       }
+       .drop3:hover .drop3-3-3{
+           display: block;
+       }
+       .drop4:hover .drop4-4-4{
+           display: block;
+       }
+       .drop5:hover .drop5-5-5{
+           display: block;
+       }
+       .drop6:hover .drop6-6-6{
+           display: block;
+       }
+        .ul2{
+            list-style-type: none;
+            margin: 0;
+            padding-left: 200px;
+            overflow:hidden;
+          
+        }
+        .li2{
+            float: left;
+        }
+        .li2 a{
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            padding: 0px  20px;
+            color: #000;
+
+        }
+        .li2 a:hover{
+            color: rgb(216, 11, 11);
+        }
+
+        #search1{
+            height: 25px;
+            width: 200px;
+            color: rgb(8, 8, 8); 
+            border: rgb(255, 4, 4) solid 2px;  
+            position: absolute;
+            left: 900px;
+            top: 70px;
+        }
+    
+        #search2{
+            height: 29px;
+            width: 50px;
+           background-color: rgb(240, 59, 59);
+           color: rgb(255, 255, 255);
+           border: none;   
+           position: absolute;
+           top: 70px; 
+           left: 1060px;  
+        }
+        #shop:hover{
+          background-color: white;
+            color:rgb(216,11,11);
+        }
+      .sdiv1 ul{
+          list-style-type: none;
+      }
+      .sdiv1 li{
+          padding-top: 5px;
+          padding-bottom: 5px;
+      }
+      .sdiv1 a:hover{
+          color: rgb(216, 11, 11);
+      }
+       .count{
+          font-size:larger;
+          font-weight: 900;
+    
+      }
+      .lana{
+          color: rgb(42, 108, 230);
+          font-size: smaller;
+
+      }
+      .div3 span{
+          font-size: smaller;
+          padding-top: 0px;
+      }
+      .div3 .lana{
+          padding-top: 30px;
+      }
+     .ding{
+         list-style-type: none;
+         padding-top: 70px;
+
+     }
+     .ding li{
+         float: left;
+         height: 40px;
+         width: 50px;
+         padding-left: 30px;
+         padding-top: 50px;
+         padding-right: 30px;
+         border: rgb(238, 238, 238) solid 1px;
+         font-size: small;
+         text-align: center;
+         
+     }
+     .ding li:hover{
+         box-shadow: 2px 2px 2px 2px rgba(83, 83, 83, 0.205);
+     }
+    .text:hover{
+        background-color: rgb(238, 238, 238)
+        
+    } 
+
+    .button a:hover{
+        color:rgb(216, 11, 11);
+    }
+    .text a:hover{
+        color:rgb(216, 11, 11);
+    }
+    </style>
+</head>
+<body>
+    <ul class="ul1" style="height: 30px;background-color: rgb(231, 224, 224); font-weight: 100; padding-left: 450px;font-size: x-small;">
+        <div class="drop3">
+             <li class="li1"> <a class="drop3-3" href="jd\登录页面.html" class="span1" id="username" value="username">denglu</a></li> 
+        <div class="drop3-3-3">
+           <a style="position: absolute;top: 20px;left: 10px;">我的京东</a><a style="position: absolute;top: 40px;left: 10px;">退出</a>
+        </div>
+          </div>
+          <li class="li1"><a  href="注册页面.html" >免费注册</a></li>   
+          <li class="li1"><a  >我的订单</a></li>  
+          <div class="drop1" >
+               <li class="li1"><a class="drop1-1" href="my.html">我的京东</a></li>
+               <ul class="drop1-1-1"style="z-index: +999;">
+                  <li> <a style="left: 10px; top: 10px;">待处理订单</a><a style="left: 150px; top: 10px;">我的问答</a></li>
+                  <li> <a style="left: 10px; top: 35px;">返修退换货</a><a style="left: 150px; top: 35px;">我的关注</a></li>
+                  <li>  <a style="left: 10px; top: 60px;">降价商品</a></li>
+                  <li> <a style="left: 10px; top: 85px;">我的京豆</a><a style="left: 150px; top: 85px;">我的优惠券</a></li>
+                  <li> <a style="left: 10px; top: 110px;">我的白条</a><a style="left: 150px; top: 110px;">我的理财</a></li>
+               </ul>
+           </div>
+         
+          <li class="li1"><a class="span1" >京东会员</a>  </li>
+          <li class="li1"><a class="span" >政企采购</a> </li>
+          <li class="li1"><a class="span1">客户服务</a> </li>
+          <div class="drop2">
+          <li class="li1"><a class="drop2-2">网站导航</a> </li>
+          <div class="drop2-2-2">
+          <ul id="div1" style="position: absolute;left: 100px;">
+              <span>特色主题</span>
+              <li ><a style="top: 20px;left: 0px;" href="https://new.jd.com/">新品首发</a><a style="left: 80px; top: 20px;" href="https://www.jdt.com.cn/finance/">京东金融</a><a style="left: 160px;top: 20px;" href="https://global.jd.com/">全球售</a><a style="left: 240px; top: 20px;" href="https://www.joybuy.com/">国际站</a></li>
+              <li><a style="left: 0px;top: 45px;" href="https://vip.jd.com/">京东会员</a><a style="top: 45px;left: 80px;" href="https://tw.jd.com/">台湾售</a><a style="top: 45px;left: 160px;" href="https://www.jd.ru/">俄语站</a><a style="top: 45px;left: 240px;" href="https://diy.jd.com/#/recommend">装机大师</a></li>
+              <li><a style="left: 0px; top: 70px;" href="https://hk.jd.com/">港澳售</a><a style="top: 70px;left: 80px;" href="https://a.jd.com/">优惠券</a><a href="https://red.jd.com/" style="top: 70px;left: 160px;">秒杀</a><a style="top: 70px;left: 240px;">闪购</a></li>
+              <li><a style="left:0px;top: 95px;" href="https://www.jd.id/">印尼站</a><a href="https://www.jd.id/" style="top: 95px;left: 80px;">陪伴计划</a><a href="https://join.jd.com/" style="top: 95px;left: 160px;">出海招商</a><a style="top: 95px;left: 240px;" href="https://join.jd.com/">拍拍二手</a></li>
+              <li><a style="left: 0px;top: 120px;" href="https://wqs11.jd.com/data/coss/recoverydata/45/fe2c4ab59833605dc85b41b408b70e3d.shtml?tpl=index?err=52">买什么</a></li>
+          </ul>
+          <ul id="div2" style="position: absolute;left: 400px;">
+              <span>行业频道</span>
+              <li><a style="top: 20px;left: 0px;" href="https://shouji.jd.com/">手机</a><a href="https://shouji.jd.com/" style="left: 80px; top: 20px;">智能数码</a><a https://shouji.jd.com/ style="left: 160px; top: 20px;">电脑办公</a></li>
+              <li><a style="left: 0px; top: 45px;" href="https://shouji.jd.com/">家用电器</a><a style="left: 80px; top: 45px;"href="https://hk.jd.com/">京东小家</a><a style="left: 160px; top: 45px;"href="https://hk.jd.com/">京东服饰</a></li>
+              <li><a style="left: 0px; top: 70px;" href="https://hk.jd.com/">京东生鲜</a><a style="left: 80px; top: 70px;"href="https://hk.jd.com/">家装城</a><a style="left: 160px; top: 70px;"href="https://hk.jd.com/">母婴</a></li>
+              <li><a style="left: 0px; top: 95px;" href="https://hk.jd.com/">食品</a><a style="left: 80px; top: 95px;" href="https://hk.jd.com/">农资频道</a><a style="left: 160px; top: 95px;" href="https://hk.jd.com/">整车</a></li>
+              <li><a style="left: 0px; top: 120px;" href="https://hk.jd.com/">图书</a><a style="left: 80px; top: 120px;" href="https://hk.jd.com/">劳动防护</a></li>
+          </ul>
+          <ul id="div3" style="position: absolute;left: 700px;">
+           <span>生活服务</span>
+           <li><a style="top: 20px;left: 0px;" href="https://hk.jd.com/">京东众筹</a><a  href="https://hk.jd.com/"style="left: 80px; top: 20px;">白条</a><a href="https://hk.jd.com/"style="left: 160px; top: 20px;">京东金融APP</a></li>
+           <li><a style="top: 45px;left: 0px;" href="https://hk.jd.com/">京东小金库</a><a  href="https://hk.jd.com/"style="left: 80px; top: 45px;">理财</a><a href="https://hk.jd.com/" style="left: 160px; top: 45px;">话费</a></li>
+           <li><a style="top: 70px;left: 0px;" href="https://hk.jd.com/">水电煤</a><a  href="https://hk.jd.com/"style="left: 80px; top: 70px;">彩票</a><a href="https://hk.jd.com/"style="left: 160px; top: 70px;">旅行</a></li>
+           <li><a style="top: 95px;left: 0px;" href="https://hk.jd.com/">机票酒店</a><a href="https://hk.jd.com/" style="left: 80px; top: 95px;">电影票</a><a href="https://hk.jd.com/"style="left: 160px; top: 95px;">京东到家</a></li>
+           <li><a style="top: 120px;left: 0px;" href="https://hk.jd.com/">游戏</a><a href="https://hk.jd.com/"style="left: 80px; top: 120px;">拍拍回收</a></li>
+          </ul>
+       <ul id="div4" style="display: inherit; height: 180px;width: 300px;position: absolute;left: 1000px; ">
+           <span>更多精选</span>
+           <li><a style="top: 20px;left: 0px;">合作招商</a><a style="left: 80px; top: 20px;">京东通信</a><a style="left: 160px; top: 20px;">京东王卡</a></li>
+           <li><a style="top: 45px;left: 0px;">企业采购</a><a style="left: 80px; top: 45px;">服务市场</a><a style="left: 160px; top: 45px;">办公生活馆</a></li>
+           <li><a style="top: 70px;left: 0px;">校园加盟</a><a style="left: 80px; top: 70px;">京东社区</a><a style="left: 160px; top: 70px;">游戏社区</a></li>
+           <li><a style="top: 95px;left: 0px;">知识产权维权</a><a style="left: 80px; top: 95px;">关于我们</a><a style="left: 160px; top: 95px;">京东安联保险</a></li>
+           
+       </ul>
+          </div>
+       </div>
+          <li class="li1"><a class="span1">手机京东</a> </li>
+          <li class="li1"><a class="span1">网站无障碍</a></li>
+       </ul>
+    <div style="border: darkgrey solid 1px; height: 80px;" >
+     <span style="position: absolute;left: 200px; top: 70px; font-size:larger;">我的京东</span>
+    <div class="drop4">
+     <div class="drop4-4" style="color: red;position: absolute;left: 500px;top: 80px;font-size: large;">首页</div>
+     <ul class="drop4-4-4">
+         <li><a href="https://order.jd.com/center/list.action" style="top: 20px;">订单中心</a></li>
+         <li><a href="https://mymoney.jd.com/finance/recently.action" style="top: 50px;">我的钱包</a></li>
+         <li><a href="https://t.jd.com/home/follow" style="top:80px;">我的关注</a></li>
+         <li><a href="https://yushou.jd.com/member/qualificationList.action" style="top: 110px;">我的活动</a></li>
+         <li><a href="https://myjd.jd.com/afs/indexNew.action?entry=8" style="top: 140px;">客户服务</a></li> 
+     </ul>
+    </div>
+     <div class="drop5">
+         <div style="position: absolute;left: 600px;top: 80px;font-size: large;">账户设置</div>
+         <div class="drop5-5-5">
+         <a href="" style="top: 20px;left: 10px;">个人信息</a><a style="top: 20px;left: 100px;">分享绑定</a>
+         <a style="top: 50px; left: 10px;">账户安全</a><a style="top: 50px;left: 100px;">我的尺码</a>
+         <a style="top: 80px;left: 10px;">收货地址</a><a style="top: 80px;left: 100px;">健康档案</a>
+         <a style="top: 110px;left: 10px;">我的银行卡</a><a style="top: 110px;left: 100px;">邮件订阅</a>
+         <a style="top: 140px;left: 10px;">账号绑定</a><a style="top: 140px;left: 100px;">授权管理</a>
+         </div>
+     </div>
+         <input type="text" id="search1"><input type="submit" value="搜 索" id="search2">
+          <div class="drop6">
+         <a id="shop" style="border: rgb(197, 197, 197) solid 1px;height: 30px;width: 120px; background-color: rgb(236, 236, 236); position: absolute;top: 70px;left: 1150px;font-size: smaller;line-height: 30px; text-align: center;text-decoration: none;">我的购物车</a>
+          <div class="drop6-6-6">
+           <div id="kong" style="display: none; position: absolute;left: 960px;top: 50px; height: 50px;width: 300px;text-align: center;box-shadow: 0px 2px 2px 0px rgb(231, 224, 224);background-color: white;color:rgb(197, 197, 197);line-height: 50px;font-size: smaller;">
+                购物车中还没有商品，赶紧选购吧
+            </div>
+             <div class="xuan" style="position: absolute;left: 960px;top: 50px;box-shadow: 0px 2px 2px 0px rgb(231, 224, 224);background-color: white; width: 300px;">
+                <div style="font-size: smaller;font-weight: 500;height: 30px;">最新加入的商品</div>
+                <div class="text" style="max-height: 450px;">
+                <div style="height: 80px;width: 300px;background-color: rgb(255, 255, 255); ">
+                <img style="height: 50px;width: 50px;left: 20px;position: relative;">
+                <a style="font-size: x-small; width: 130px;position: absolute;left: 80px;top: 30px;height: 60px;">fjjjjfy</a>
+                </div>
+                <div style="font-size: smaller;font-weight: 700;position:absolute;left: 200px;top: 30px;">3566</div>
+                <a style="font-size: x-small; position:absolute;left: 250px;top: 50px;" class="delate">删除</a>
+                </div>
+                <div style="background-color: rgb(238, 238, 238);height: 40px;width: 300px;">
+                <a class="button" style="position: absolute;left: 200px; background-color: rgb(216, 11, 11);color: white; font-size: xx-small;width: 70px;height: 30px;text-align: center;line-height: 30px;border-radius:5px;">去购物车</a>
+                </div>
+            </div>
+          </div>
+        </div>
+</div>
+<div style="background-color: rgb(236, 236, 236); height: 1000px;">
+<div class="sdiv1" style="height: 700px;width: 180px;background-color: white;position: absolute; left: 120px;">
+    <ul>
+        <h4>订单中心</h4>
+        <li><a>我的订单</a></li>
+        <li><a>晒单评论</a></li>
+      
+    </ul>
+    <ul>
+        <h4>我的钱包</h4>
+        <li><a>优惠券</a></li>
+        <li><a>京豆</a></li>
+        <li><a>白条</a></li>
+        <li><a>红包</a></li>
+        <li><a>礼品卡</a></li>
+        <li><a>更多</a></li>
+    </ul>
+    <ul>
+        <h4>我的关注</h4>
+        <li><a>关注商品</a></li>
+        <li><a>关注店铺</a></li>
+      
+    </ul>
+    <ul >
+        <h4>我的活动</h4>
+        <li><a>我的预约</a></li>
+        <li><a>我的拍卖</a></li>
+      
+    </ul>
+    <div style="height: 220px;width: 1020px;left: 220px; background-color: white;top: 30px;position: absolute;">
+        <div style="height: 240px;width: 250px;position: absolute;top: -10px;left: 0px;background-color: rgb(235, 39, 39);box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.205);">
+        <img class="touxiang" style="height: 70px;width: 70px;border-radius: 50%;background-color: rgb(255, 255, 255);position: absolute;top: 30px;left: 80px;box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.473);">
+        <h3 class="username" style="color: white;position: absolute;top: 100px;left: 90px;">用户名</h3>
+    </div >
+        <span style="position: absolute;left: 280px;top: 20px;">我的钱包</span>
+        <div class="div3">
+        <ul style="list-style-type: none; position: absolute;left: 250px;top: 50px;height: 150px;width: 80px;">
+           <li> <a class="count">0</a></li>
+           <li><span>优惠券</span></li>
+            <li class="lana"><a class="lana">领券</a></li>
+        </ul>
+        <ul style="list-style-type: none; position: absolute;left: 380px;top: 50px;height: 150px;width: 80px;">
+            <li> <a class="count">0</a></li>
+            <li><span>京豆</span></li>
+             <li class="lana"><a class="lana">赚京豆</a></li>
+         </ul>
+         <ul style="list-style-type: none; position: absolute;left: 510px;top: 50px;height: 150px;width: 80px;">
+            <li> <a class="count">0</a></li>
+            <li><span>余额</span></li>
+             
+         </ul>
+         <ul style="list-style-type: none; position: absolute;left: 640px;top: 50px;height: 150px;width: 80px;">
+            <li> <a class="count">0</a></li>
+            <li><span>暂未开通白条</span></li>
+             <li class="lana"><a class="lana">开通</a></li>
+         </ul>
+        
+         <ul style="list-style-type: none; position: absolute;left: 770px;top: 50px;height: 150px;width: 120px;">
+            <li> <a class="count">0</a></li>
+            <li><span>小金库昨日收益</span></li>
+             <li class="lana"><a class="lana">转入小金库，马上赚钱</a></li>
+         </ul>
+        </div>
+        <div style="height: 400px;width: 700px;background-color: white;position: absolute;top: 250px;">
+            <span style="padding-left: 20px;top: 20px;position: absolute;">我的订单</span>
+            <ul class="ding">
+                <li><a>待付款</a></li>
+                <li><a>待收货</a></li>
+                <li><a>待评价</a></li>
+                <li><a>退换/售后</a></li>
+                <li><a>全部订单</a></li>
+            </ul> 
+        </div>
+        <div style="height: 150px;width: 300px;position: absolute;left: 720px;top: 250px;background-color: white;">
+            <span style="padding-left: 20px;top: 20px;position: absolute;">我的关注</span>
+            <ul style="list-style-type: none; height: 50px;width: 100px;padding-top: 50px;float: left;">
+                <li> <a class="count">0</a></li>
+                <li><span>商品关注</span></li>
+             </ul>
+             <ul style="list-style-type: none; height: 50px;width: 100px;padding-top: 50px;float: left;">
+                <li> <a class="count">0</a></li>
+                <li><span>店铺关注</span></li>
+             </ul> 
+        </div>
+    </div>
+
+ 
+</div>
+</div>
+</body>
+<script>
+    var delate=document.getElementsByClassName('delate')
+    var con=document.getElementsByClassName('xuan')
+    
+    for(let i=0;i<delate.length;i++)
+    {
+        delate[i].onclick=function(){
+            this.parentNode.remove(con[i])
+            if(i=0)
+            {
+                var kong=document.getElementsById('kong')
+                kong.style.display='block'
+            }
+        }
+        
+    }
+</script>
+</html>

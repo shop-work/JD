@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品页面</title>
+<style>
+     #demo .carousel-item{
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+   
+}
+#demo .carousel-indicators{
+ position: absolute;
+ list-style-type: none;
+}
+#demo .carousel-indicators li{
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    float: left;
+    background-color: rgba(255, 255, 255, 0.281);
+    z-index: +999;
+   position: absolute;
+   top: 450px;
+}
+
+#demo #left-right .move{
+    position: absolute;
+    margin-top: 260px;
+    height: 30px;
+    width: 20px;
+    font-size: 20px;
+    padding-left: 10px;
+    z-index: +99;
+    background-color: rgba(0, 0, 0, 0.308);
+    color: rgb(255, 255, 255);
+}
+#demo #left-right #next {
+    left:470px ;
+    position: absolute;
+}
+#demo li:hover{
+    background-color: white;
+}
+#demo #left-right .move:hover{
+    background-color: rgba(0, 0, 0, 0.733);
+}
+.choose input[type="radio"]{
+  display: none;
+}
+.gongneng input[type="radio"]{
+  display: none;
+}
+.choose input[type="radio"]+label{
+    width: 80px;
+    height: 40px;
+    font-size: smaller;
+    color:rgb(100, 100, 100);
+    border: solid 1.5px rgb(133, 133, 133);
+    text-align: center;
+    line-height: 40px;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+.choose input[type="radio"]+label:hover{
+    border: red solid 1.5px;
+}
+.choose input[type="radio"]:checked+label{
+    border: red solid 1.5px;
+}
+.little li{
+    float: left;
+    margin: 20px;
+    margin-top: 80px;
+}
+.little a{
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.733);
+}
+.little a:hover{
+    color: red;
+}
+.dian li{
+    float: left;
+   margin-top: -5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: rgba(192, 192, 192, 0.308) solid 1px;
+    color: rgb(100, 100, 100) ;
+    height: 30px;
+    width: 70px;
+    font-size: small;
+    text-align: center;
+    line-height: 30px;
+}
+.gongneng{
+    height: 40px;
+    width: 1000px;
+    background-color: rgba(192, 192, 192, 0.308);
+    border-bottom: red solid 1px;
+}
+.gongneng ul{
+    position: absolute;
+    left: 370px;
+    top: 695px;
+
+}
+.gongneng input[type="radio"]+label{
+    width: 120px;
+    height: 40px;
+    float: left;
+    line-height: 40px;
+    text-align: center;
+    color: rgb(100, 100, 100);
+}
+.gongneng input[type="radio"]+label:hover{
+   color: red;
+}
+.gongneng input[type="radio"]:checked+label{
+   color: white;
+   background-color: red;
+}
+
+#yin1 ul{
+ list-style-type: none;
+ padding-bottom: 10px;
+}
+#yin1 li{
+ float: left;
+padding-left: 20px;
+padding-right: 20px;
+font-size: smaller;
+color: rgb(133, 133, 133);
+}
+#pl1 input[type="radio"]{
+ display: none;
+
+
+}
+#pl1 input[type="radio"]+label{
+ width: 80px;
+ height: 20px;
+ color: rgb(187, 187, 187);
+ font-size: xx-small;
+ border: rgb(187, 187, 187) solid 1px;
+ float: left;
+ text-align: center;
+ line-height: 20px;
+ margin-left: 30px;
+}
+
+#pl1 input[type="radio"]+label:hover{
+ border: rgb(100, 100, 100) solid 1px;
+ color: rgb(100, 100, 100);
+}
+#pl1 input[type="radio"]:checked+label{
+color: red;
+border: red solid 1px;
+}
+#pl2{
+ position: absolute;
+}
+#pl2 input[type="radio"]{
+ display: none;
+}
+#pl2 input[type="radio"]+label{
+ color: rgb(133, 133, 133);
+ font-size: small;
+ margin-left: 50px;
+ float: left;
+ text-align: center;
+ line-height: 30px;
+}
+#pl2 input[type="radio"]+label:hover{
+ color: red;
+}
+#pl2 input[type="radio"]:checked+label{
+ color: red;
+}
+
+</style>
+</head>
+<body>
+    <div id="demo" class="carousel slide" data-ride="carousel" style="height: 500px;width: 500px;position: relative;left: 100px;top: 80px;">
+     <!-- 指示符 -->
+     <ul class="carousel-indicators">
+        <li class="li" style="left: 10px;"></li>
+        <li class="li" style="left: 30px;"></li>
+        <li class="li" style="left: 50px;"></li>
+        <li class="li" style="left: 70px;"></li>
+        <li class="li" style="left: 90px;"></li>
+        <li class="li" style="left: 110px;"></li>
+        <li class="li" style="left: 130px;"></li>
+   
+      </ul>
+        <!-- 轮播图片 -->
+        <div class="carousel-inner">
+          <a class="carousel-item" id="1" href="https://pro.jd.com/mall/active/3ZYfZKGRAhbHzJySpRriJoGWo8v6/index.html?innerAnchor=100026667858&focus=3">
+            <img src="https://tse1-mm.cn.bing.net/th/id/R-C.901f8ebdab22d065baefeae6c2701cc0?rik=Z3Hew18zFaF%2bLQ&riu=http%3a%2f%2fwww.pp3.cn%2fuploads%2f20120418lw%2f13.jpg&ehk=Es5ZGH90h%2foCghvlIwdKfUiqpO05gLSgOEBU2i0Mwok%3d&risl=&pid=ImgRaw&r=0">
+          </a>
+          <a class="carousel-item" id="2" href="https://lps.jd.com/pc/psp/1002007916?imup=ChIKDOWkp-eZveW5u-aDsxIAGAASEAjs2uXdAxDAaBoAINBfKAEYsBsgACogaWosdWUseGdjLGdpYSxjaWEsZl9iYV9mbF9sMTYzMzAyAmlqSqcBSXxTSFVOVF9JSixJX0FfRkxfSixJX0FfUkVfSixJX0FfUExfSixJX0FfU0xfSixJX0FfQ1NfSixJX0FfUlNfSixJX1VfRkxfSixJX1NfRkxfSixJX1JfRkxfSixJX1BfRkxfSixJX0dfUkxfSixJX0dfWEdfUixJX0JfRkxfUixHSUEsWEdDLFVBfDtGfE1JWFRBR19GUixGX0JBX0ZMX0wxNjMzMHw&extension_id=eyJhZCI6IjM1MDQiLCJjaCI6IjIiLCJza3UiOiIxMDAyMDA3OTE2IiwidHMiOiIxNjQ0MDUzNDIzIiwidW5pcWlkIjoie1wiY2xpY2tfaWRcIjpcIjI1OTcyNDYzLTc5ZjQtNDk5NS05NTM0LTQ1M2YxODNiODM4ZFwiLFwibWF0ZXJpYWxfaWRcIjpcIjgwNzM2MjIzMTEyMjE5MDM0NTdcIixcInBvc19pZFwiOlwiMzUwNFwiLFwic2lkXCI6XCI0MmQ1YWZjNi1kMGRkLTRjMWUtOTFiZC05ODAxMGJmZWMzNmNcIn0ifQ==&jd_pop=25972463-79f4-4995-9534-453f183b838d&abt=0">
+            <img src="https://tse1-mm.cn.bing.net/th/id/R-C.83253bf5007cd3cf05c315a8f3d0820b?rik=SDH41OT6GjdmlQ&riu=http%3a%2f%2fwww.desktx.com%2fd%2ffile%2fwallpaper%2fscenery%2f20170215%2ff2d0a76c4d45e7255022f3c511e8bd7a.jpg&ehk=St4XCEEUbOi7HWL7L77WZEyZp096qDgXF070s0sw3Lg%3d&risl=&pid=ImgRaw&r=0">
+          </a>
+          <a class="carousel-item" id="3" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+            <img src="https://tse1-mm.cn.bing.net/th/id/R-C.c6c03edea530e9caa677c9d17f193a4d?rik=MBgpsjumbTD5eQ&riu=http%3a%2f%2fwww.desktx.com%2fd%2ffile%2fwallpaper%2fscenery%2f20170209%2fca186d97701674b996264b2d352894a7.jpg&ehk=HunG%2fPF7pUbpcS34cWpNvlS%2faoDPbcaTYL6LFFPQIIM%3d&risl=&pid=ImgRaw&r=0">
+          </a>
+          <a class="carousel-item" id="4" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+            <img src="https://tse1-mm.cn.bing.net/th/id/R-C.15a1ba773a211acdeae39f83c2c13241?rik=h1wkOstFSHzvTg&riu=http%3a%2f%2fwww.desktx.com%2fd%2ffile%2fwallpaper%2fscenery%2f20170120%2ffdf948c82074494a74bf258eed4f855d.jpg&ehk=fYrgVtm0hD0sZn455mcVyf5k%2bQz7RScjHLMyUi6jG0A%3d&risl=&pid=ImgRaw&r=0">
+          </a>
+          <a class="carousel-item" id="5" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+            <img src="https://tse1-mm.cn.bing.net/th/id/R-C.dab436e6a9d23101d719c1f3dd1a76a4?rik=ecsSPgiqEPBeNQ&riu=http%3a%2f%2fwww.shijuepi.com%2fuploads%2fallimg%2f201115%2f1-2011151G454.jpg&ehk=61OG%2bh8posKeFHHqLOOPJLQh6brnOHElxrxY9xRbGY4%3d&risl=&pid=ImgRaw&r=0">
+          </a>
+          <a class="carousel-item" id="6" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+            <img src="https://tse1-mm.cn.bing.net/th/id/R-C.99c17a64707822ed071aa73b0f41fd02?rik=XHL2flZ2h8wgEw&riu=http%3a%2f%2fwww.dnzhuti.com%2fuploads%2fallimg%2f170323%2f95-1F323144449.jpg&ehk=aYX9ubjmsW26aNvEe2oJRJwuS%2bR8VHXQk0P3gqFgUd8%3d&risl=&pid=ImgRaw&r=0">
+          </a>
+          <a class="carousel-item" id="7" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+            <img src="https://img.zcool.cn/community/01c8f15aeac135a801207fa16836ae.jpg@1280w_1l_2o_100sh.jpg">
+          </a>
+
+        </div>
+       
+        <!-- 左右切换按钮 -->
+    <div id="left-right">
+        <div class="move" id="prev"><
+        </div>
+        <div class="move" id="next">>
+        </div>
+    </div>   
+      </div>
+
+      <div style="position: absolute;left: 650px;top: 90px; height: 180px;width: 700px;background-color:rgb(247, 247, 247);">
+     <div style="font-weight: 700;text-align: center;height: 30px;line-height: 30px;color: rgb(100, 100, 100);">小米11青春活力版 骁龙778G处理器 AMOLED柔性直屏 冰峰黑提 8GB+128GB 5G时尚手机</div>
+     <div style="position: absolute;top: 70px;left: 20px;"><span style="font-size: small;color: rgb(133, 133, 133);">价格：</span><span style="color: red;font-size: x-large;">1869.00</span></div>
+     <ul style="list-style-type: none;" class="little"> 
+         <li><a id="guan">关注</a></li>
+         <li><a id="write">商品评价</a></li>
+     </ul>
+    </div>
+     <div class="choose" style="position: absolute;left: 650px; top: 300px;">
+        <div>
+         <span>选择颜色:</span>
+         <form >
+        <input type="radio" id="c1" name="color"><label for="c1">黑色</label>
+         <input type="radio" id="c2"name="color"><label for="c2">薄荷色</label>
+        <input type="radio"id="c3"name="color"><label for="c3">樱花粉</label>
+       <input type="radio"id="c4"name="color"><label for="c4">白雪晴</label>
+         </form>
+     </div>
+     <div style="position: absolute;top: 90px;">
+         <span>选择版本:</span>
+         <form >
+            <input type="radio"id="t1"name="type"> <label for="t1">8GB+128GB</label>
+            <input type="radio"id="t2"name="type"><label for="t2">8GB+256GB</label>
+         </form>
+     </div>
+     <div style="position: absolute;top: 180px;">
+        <span>购买方式:</span>
+        <form>
+            <input type="radio"id="s1"name="style"><label for="s1">套装版</label>
+            <input type="radio"id="s2"name="style"><label for="s2">环保版</label>
+        </form>
+    </div>
+    </div>
+    <div style="position: absolute;left: 650px;top: 600px;">
+        <input type="number" style="width: 50px;height: 40px;">
+        <input class="button" id="button1" type="button" style="margin-left: 20px; width: 200px; height: 50px;color:white; font-size: larger;background-color: red;border: none;" value="加入购物车">
+    </div>
+    <div style="height:100px;width: 250px;margin-top: 200px;margin-left: 100px;border:rgba(192, 192, 192, 0.308) solid 1px;">
+        <div style="height: 50px;width: 250px;font-weight: 700;text-align: center;line-height: 50px;background-color: rgba(192, 192, 192, 0.308);color: rgb(100, 100, 100);">小米京东自营旗舰店</div>
+         <ul class="dian" style="list-style-type:square">
+            <a href="dp.html"> <li>进入店铺</li></a>
+             <li id="guandian">关注店铺</li>
+         </ul>
+    </div>
+    <div style="height: 300px;width: 1000px;margin-top:-100px;margin-left: 400px;">
+       <div class="gongneng">
+        <ul  style="list-style-type: none;">
+        <input class="gn" id="gn1" name="gn" type="radio"><label for="gn1">商品介绍</label>
+        <input class="gn" id="gn2" name="gn" type="radio"><label for="gn2">商品评价</label>
+        <input class="button" id="button2" type="button" style=" position: absolute;left: 900px;top: 5px; width: 100px; height: 30px;color:white; font-size: smaller;background-color: red;border: none;" value="加入购物车">
+     </ul>
+     </div>
+     <div id="yin1" style="display: none; height: 250px;width: 1000px;margin-top: 50px;">
+    <span style="color: rgb(100, 100, 100); font-size: smaller;padding-left: 30px;">品牌： 小米（MI）</span>
+        <ul>
+        <li>商品名称：小米小米11 Pro</li><li>商品编号：100019791894</li><li>商品毛重：400.00g</li><li>商品产地：中国大陆</li>
+    </ul>
+    <ul>
+        <li>CPU型号：骁龙888</li><li>运行内存：12GB</li><li>存储卡：不支持存储卡</li><li>后摄主摄像素：5000万像素</li>
+    </ul>
+    <ul>
+        <li>前摄主摄像素：2000万像素</li><li>分辨率：QHD+及以上</li><li>分辨率：充电器：其他</li><li>热点：液冷散热，人脸识别，无线</li>
+    </ul>
+    <ul>
+        <li>支持IPv6：支持IPv6</li><li>系统：Android</li><li>机身内存：256GB</li><li>游戏配置：游戏音效增强，液冷散热</li>
+    </ul>
+    </div>
+   <div id="yin2"style="width: 1000px;min-height: 1200px;">
+    <div style="background-color: rgba(192, 192, 192, 0.308);width: 1000px;height: 40px;margin-top: 20px;color: rgb(100, 100, 100);line-height: 40px;font-weight: 900;padding-left: 20px;">商品评价</div>
+    <div style="width: 1000px;height: 150px;">
+    <div  style="width: 100px;height: 100px; padding-left: 20px;">
+      <h6>好评度</h6>
+      <h1 style="color: red; ">91%</h1>
+      <form style="float: left;position: absolute;margin-left: 100px;margin-top: -80px;" id="pl1" class="pl">
+      <input type="radio" id="1-" name="1"><label for="1-">流畅</label>
+      <input type="radio" id="2-" name="1"><label for="2-">清晰</label>
+      <input type="radio" id="3-" name="1"><label for="3-">漂亮</label>
+      <input type="radio" id="4-" name="1"><label for="4-">充电快</label>
+    </form>
+    </div>
+    </div>
+    <div id="pl2" style="width: 1000px;height: 30px;background-color:rgba(192, 192, 192, 0.308);">
+    <input type="radio" id="11" name="2" ><label for="11">全部评论</label>
+    <input type="radio" id="22" name="2" ><label for="22">晒图</label>
+    <input type="radio" id="55" name="2" ><label for="55">追评</label>
+    <input type="radio" id="33" name="2" ><label for="33">好评</label>
+    <input type="radio" id="44" name="2" ><label for="44">差评</label>
+</div>
+    <div style="height: 600px;width: 1000px; border-bottom: rgb(187, 187, 187) solid 1.5px;">
+    <div style="height: 600px; width:150px;">
+     <div>
+        <img class="touxiang" style="height: 20px;width: 20px;border-radius: 50%;background-color: rgb(187, 187, 187);margin-top: 40px;margin-left: 10px;">
+         <p class="usename" style="font-size: small;font-weight: 200;position: absolute;margin-top: -25px;margin-left: 40px;">bgeee</p>
+    </div>
+    <div>
+        <div style="position: absolute;margin-left: 150px; height: 450px;width: 850px;background-color: antiquewhite;">
+
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+</body>
+<script>
+    var demo=document.getElementById('demo')
+var picture=document.getElementsByClassName('carousel-item')
+var li=document.getElementsByClassName('li')
+var prev=document.getElementById('prev')
+var next=document.getElementById('next')
+var len=picture.length
+ var   index=0
+  var  timer=null 
+    function solide(){
+        li.onmouseover=function(){
+            if(timer){
+                clearInterval(timer);
+            }
+        }
+    
+        li.onmouseout=function(){
+            timer=setInterval(function(){
+            index++;
+            if(index>=len){
+                index=0;
+            }
+            changImg();
+        },3000);
+        }
+        li.onmouseout();
+        for( var j=0;j<len;j++){
+            li[j].index=j;
+            li[j].onclick=function(){
+                index=this.index;
+                changImg();
+            }
+        }
+        prev.onclick=function(){
+            index--;
+            if(index<0){
+                index=len-1;
+            }
+            changImg();
+        }
+        next.onclick=function(){
+            index++;
+           if(index>len){
+               index=0;
+           }
+           changImg();
+        }
+    }
+        solide();
+     function changImg(){
+            for(var i=0;i<len;i++){
+                picture[i].style.display='none';
+            }
+            picture[index].style.display='block';
+        }
+   var button1=document.getElementById('button1')
+   var button2=document.getElementById('button2')
+   button1.onclick=function(){
+     alert("已加入购物车");
+     
+   } 
+   button2.onclick=function(){
+     alert("已加入购物车");
+   } 
+   
+   var guan=document.getElementById('guan')
+   guan.onclick=function(){
+       alert("关注成功！")
+   } 
+   var guandian=document.getElementById('guandian')
+   guandian.onclick=function(){
+       guandian.innerText='已关注店铺';
+   } 
+   var gn=document.getElementsByClassName('gn')
+   var gn1=document.getElementById('gn1')
+   var gn2=document.getElementById('gn2')
+   gn1.onclick=function(){
+   var yin1=document.getElementById('yin1')
+   yin1.style.display='block'
+   }
+   gn2.onclick=function(){
+   var yin2=document.getElementById('yin2')
+   yin2.style.display='block'
+   }
+
+
+</script>
+</html>
