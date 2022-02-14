@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <style>
+        
+        .ul1{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow:hidden;
+            background-color: rgb(236, 236, 236);
+        }
+        .li1{
+            float: left;
+        }
+        .li1 a, .drop1-1{
+            display: block;
+            color: rgb(100, 100, 100);
+            text-align: center;
+            padding: 6px 10px 0px 20px;
+            text-decoration: none;
+            font-size: smaller;
+            border-left-color: rgb(100, 100, 100);
+            border-right-color: rgb(100, 100, 100);
+        }
+        .li1 a:hover, .drop1:hover, .drop1-1{
+            color: rgb(216, 11, 11);
+        }
+       .drop1{
+           display: inline-block;  
+       }
+       .drop2{
+           display: inline-block;
+       }
+       .drop3{
+           display:inline-block;
+       }
+       .drop1-1-1{
+           display: none;
+           position: absolute;
+          background-color: white;
+           min-width: 300px;
+           height: 150px;
+           
+           top: 33px;
+           list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow:hidden;
+            box-shadow:0px 8px 16px 0px rgba(0, 0, 0, 0.2) ;
+
+       }
+       .drop2-2-2{
+           display: none;
+           position: absolute;
+          background-color: white;
+           min-width: 1600px;
+           height: 180px;
+           top: 33px;
+           left: 100px;
+           z-index: +999;
+           box-shadow:0px 80px 80px 0px rgba(0, 0, 0, 0.2) ;
+       }
+       .drop3-3-3{
+           display: none;
+           position: absolute;
+          background-color: white;
+           min-width: 80px;
+           height: 80px;
+           top: 33px;
+           left: 1000px;
+           z-index: +999;
+           box-shadow:0px 80px 80px 0px rgba(0, 0, 0, 0.2) ;
+       }
+       .drop1-1-1 a{
+           color:rgb(100,100,100);
+           text-decoration: none;
+           display: block;
+           background-color:rgb(255, 255, 255);
+           font-size: x-small;
+           position: absolute;
+       }
+       .drop2-2-2 a{
+           color:rgb(100,100,100);
+           text-decoration: none;
+           display: block;
+           background-color:rgb(255, 255, 255);
+           font-size: x-small;
+         position: absolute;
+       }
+       .drop3-3-3 a{
+           color:rgb(100,100,100);
+           text-decoration: none;
+           display: block;
+           background-color:rgb(255, 255, 255);
+           font-size: x-small;
+         position: absolute;
+       }
+       
+       .drop2-2-2 ul{
+        list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow:hidden;
+            position: absolute; 
+            width: 400px;
+            display:inherit;
+            height: 180px;
+            position: absolute;
+           
+       }
+       .drop2-2-2 span{
+           font-weight: 400; 
+       }
+       .drop2-2-2 li{
+           height: 20px;
+           width: 300px;
+           padding-left: 30px;
+       }
+       .drop1-1-1 a:hover{
+           color:rgb(216, 11, 11);
+         
+       }
+       .drop2-2-2 a:hover{
+           color:rgb(216, 11, 11);
+         
+       }
+       .drop3-3-3 a:hover{
+           color:rgb(216, 11, 11);
+         
+       }
+       .drop1:hover .drop1-1-1{
+           display: block;
+       }
+       .drop2:hover .drop2-2-2{
+           display: block;
+       }
+       .drop3:hover .drop3-3-3{
+           display: block;
+       }
+  
+        .ul2{
+            list-style-type: none;
+            margin: 0;
+            padding-left: 200px;
+            overflow:hidden;
+          
+        }
+        .li2{
+            float: left;
+        }
+        .li2 a{
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            padding: 0px  20px;
+            color: #000;
+
+        }
+        .li2 a:hover{
+            color: rgb(216, 11, 11);
+        }
+
+     
+        #search1{
+            height: 30px;
+            width: 540px;
+            color: rgb(8, 8, 8); 
+            border: rgb(255, 4, 4) solid 2px;  
+            position: absolute;
+            left: 400px;
+            top: 70px;
+        }
+    
+        #search2{
+            height: 36px;
+            width: 60px;
+           background-color: rgb(240, 59, 59);
+           color: rgb(255, 255, 255);
+           border: none;   
+           position: absolute;
+           top: 70px; 
+           left: 900px;  
+        }
+      
+        .ul3{
+            list-style-type: none;
+            margin: 0;
+            padding: 20px 0px 0px 20px;
+            overflow:hidden;
+          
+        }
+      .li3{
+          height: 25px;
+      }
+      .li3 a{
+          text-decoration: none;
+          color: #000;
+          
+      }
+      .li3:hover{
+          background-color: rgb(196, 196, 196);
+      }
+       .li3 a:hover{
+           
+           color:rgb(216, 11, 11);
+       } 
+       /*----------------------------------------------------------------------------------------------------------------------------------------*/
+       #demo .carousel-item{
+           position: absolute;
+           width: 1000px;
+           height: 500px;
+           overflow: hidden;
+          
+       }
+       #demo .carousel-indicators{
+        position: absolute;
+        list-style-type: none;
+       }
+       #demo .carousel-indicators li{
+           height: 10px;
+           width: 10px;
+           border-radius: 50%;
+           float: left;
+           background-color: rgba(255, 255, 255, 0.281);
+           z-index: +999;
+          position: absolute;
+          top: 450px;
+       }
+
+       #demo #left-right .move{
+           position: absolute;
+           margin-top: 260px;
+           height: 30px;
+           width: 20px;
+           font-size: 20px;
+           padding-left: 10px;
+           z-index: +99;
+           background-color: rgba(0, 0, 0, 0.308);
+           color: rgb(255, 255, 255);
+       }
+       #demo #left-right #next {
+           left:970px ;
+           position: absolute;
+       }
+       #demo li:hover{
+           background-color: white;
+       }
+       #demo #left-right .move:hover{
+           background-color: rgba(0, 0, 0, 0.733);
+       }
+    </style>
+</head>
+<body>
+    <ul class="ul1" style="height: 30px;background-color: rgb(231, 224, 224); font-weight: 100; padding-left: 450px;font-size: x-small;">
+     <div class="drop3">
+          <li class="li1"> <a class="drop3-3" href="登录页面.html" class="span1" id="username">登录</a></li> 
+     <div class="drop3-3-3">
+        <a style="position: absolute;top: 20px;left: 10px;" href="my.html">我的京东</a><a style="position: absolute;top: 40px;left: 10px;" href="jd.html">退出</a>
+     </div>
+       </div>
+       <li class="li1"><a  href="注册页面.html" style=" color: rgb(253, 55, 55);">免费注册</a></li>   
+       <li class="li1"><a href="dd.html" >我的订单</a></li>  
+       <div class="drop1" >
+            <li class="li1"><a class="drop1-1" href="my.html">我的京东</a></li>
+            <ul class="drop1-1-1"style="z-index: +999;">
+               <li> <a style="left: 10px; top: 10px;" href="dd.html">待处理订单</a><a style="left: 150px; top: 10px;">我的问答</a></li>
+               <li> <a style="left: 10px; top: 35px;">返修退换货</a><a style="left: 150px; top: 35px;">我的关注</a></li>
+               <li>  <a style="left: 10px; top: 60px;">降价商品</a></li>
+               <li> <a style="left: 10px; top: 85px;">我的京豆</a><a style="left: 150px; top: 85px;">我的优惠券</a></li>
+               <li> <a style="left: 10px; top: 110px;">我的白条</a><a style="left: 150px; top: 110px;">我的理财</a></li>
+            </ul>
+        </div>
+      
+       <li class="li1"><a class="span1" >京东会员</a>  </li>
+       <li class="li1"><a class="span" style="color: rgb(253, 55, 55);">政企采购</a> </li>
+       <li class="li1"><a class="span1">客户服务</a> </li>
+       <div class="drop2">
+       <li class="li1"><a class="drop2-2">网站导航</a> </li>
+       <div class="drop2-2-2">
+       <ul id="div1" style="position: absolute;left: 100px;">
+           <span>特色主题</span>
+           <li ><a style="top: 20px;left: 0px;" href="https://new.jd.com/">新品首发</a><a style="left: 80px; top: 20px;" href="https://www.jdt.com.cn/finance/">京东金融</a><a style="left: 160px;top: 20px;" href="https://global.jd.com/">全球售</a><a style="left: 240px; top: 20px;" href="https://www.joybuy.com/">国际站</a></li>
+           <li><a style="left: 0px;top: 45px;" href="https://vip.jd.com/">京东会员</a><a style="top: 45px;left: 80px;" href="https://tw.jd.com/">台湾售</a><a style="top: 45px;left: 160px;" href="https://www.jd.ru/">俄语站</a><a style="top: 45px;left: 240px;" href="https://diy.jd.com/#/recommend">装机大师</a></li>
+           <li><a style="left: 0px; top: 70px;" href="https://hk.jd.com/">港澳售</a><a style="top: 70px;left: 80px;" href="https://a.jd.com/">优惠券</a><a href="https://red.jd.com/" style="top: 70px;left: 160px;">秒杀</a><a style="top: 70px;left: 240px;">闪购</a></li>
+           <li><a style="left:0px;top: 95px;" href="https://www.jd.id/">印尼站</a><a href="https://www.jd.id/" style="top: 95px;left: 80px;">陪伴计划</a><a href="https://join.jd.com/" style="top: 95px;left: 160px;">出海招商</a><a style="top: 95px;left: 240px;" href="https://join.jd.com/">拍拍二手</a></li>
+           <li><a style="left: 0px;top: 120px;" href="https://wqs11.jd.com/data/coss/recoverydata/45/fe2c4ab59833605dc85b41b408b70e3d.shtml?tpl=index?err=52">买什么</a></li>
+       </ul>
+       <ul id="div2" style="position: absolute;left: 400px;">
+           <span>行业频道</span>
+           <li><a style="top: 20px;left: 0px;" href="https://shouji.jd.com/">手机</a><a href="https://shouji.jd.com/" style="left: 80px; top: 20px;">智能数码</a><a https://shouji.jd.com/ style="left: 160px; top: 20px;">电脑办公</a></li>
+           <li><a style="left: 0px; top: 45px;" href="https://shouji.jd.com/">家用电器</a><a style="left: 80px; top: 45px;"href="https://hk.jd.com/">京东小家</a><a style="left: 160px; top: 45px;"href="https://hk.jd.com/">京东服饰</a></li>
+           <li><a style="left: 0px; top: 70px;" href="https://hk.jd.com/">京东生鲜</a><a style="left: 80px; top: 70px;"href="https://hk.jd.com/">家装城</a><a style="left: 160px; top: 70px;"href="https://hk.jd.com/">母婴</a></li>
+           <li><a style="left: 0px; top: 95px;" href="https://hk.jd.com/">食品</a><a style="left: 80px; top: 95px;" href="https://hk.jd.com/">农资频道</a><a style="left: 160px; top: 95px;" href="https://hk.jd.com/">整车</a></li>
+           <li><a style="left: 0px; top: 120px;" href="https://hk.jd.com/">图书</a><a style="left: 80px; top: 120px;" href="https://hk.jd.com/">劳动防护</a></li>
+       </ul>
+       <ul id="div3" style="position: absolute;left: 700px;">
+        <span>生活服务</span>
+        <li><a style="top: 20px;left: 0px;" href="https://hk.jd.com/">京东众筹</a><a  href="https://hk.jd.com/"style="left: 80px; top: 20px;">白条</a><a href="https://hk.jd.com/"style="left: 160px; top: 20px;">京东金融APP</a></li>
+        <li><a style="top: 45px;left: 0px;" href="https://hk.jd.com/">京东小金库</a><a  href="https://hk.jd.com/"style="left: 80px; top: 45px;">理财</a><a href="https://hk.jd.com/" style="left: 160px; top: 45px;">话费</a></li>
+        <li><a style="top: 70px;left: 0px;" href="https://hk.jd.com/">水电煤</a><a  href="https://hk.jd.com/"style="left: 80px; top: 70px;">彩票</a><a href="https://hk.jd.com/"style="left: 160px; top: 70px;">旅行</a></li>
+        <li><a style="top: 95px;left: 0px;" href="https://hk.jd.com/">机票酒店</a><a href="https://hk.jd.com/" style="left: 80px; top: 95px;">电影票</a><a href="https://hk.jd.com/"style="left: 160px; top: 95px;">京东到家</a></li>
+        <li><a style="top: 120px;left: 0px;" href="https://hk.jd.com/">游戏</a><a href="https://hk.jd.com/"style="left: 80px; top: 120px;">拍拍回收</a></li>
+       </ul>
+    <ul id="div4" style="display: inherit; height: 180px;width: 300px;position: absolute;left: 1000px; ">
+        <span>更多精选</span>
+        <li><a style="top: 20px;left: 0px;">合作招商</a><a style="left: 80px; top: 20px;">京东通信</a><a style="left: 160px; top: 20px;">京东王卡</a></li>
+        <li><a style="top: 45px;left: 0px;">企业采购</a><a style="left: 80px; top: 45px;">服务市场</a><a style="left: 160px; top: 45px;">办公生活馆</a></li>
+        <li><a style="top: 70px;left: 0px;">校园加盟</a><a style="left: 80px; top: 70px;">京东社区</a><a style="left: 160px; top: 70px;">游戏社区</a></li>
+        <li><a style="top: 95px;left: 0px;">知识产权维权</a><a style="left: 80px; top: 95px;">关于我们</a><a style="left: 160px; top: 95px;">京东安联保险</a></li>
+        
+    </ul>
+       </div>
+    </div>
+       <li class="li1"><a class="span1">手机京东</a> </li>
+       <li class="li1"><a class="span1">网站无障碍</a></li>
+    </ul>
+    <div style="height: 150px;border: rgb(173, 173, 173) solid 1px;"><input type="text" id="search1"><input type="submit" value="搜 索" id="search2">
+    <ul class="ul2" style="position: absolute; top: 155px;">
+        <li class="li2"><a href="https://miaosha.jd.com/" style="color: red; text-decoration: none; font-weight: 700;">秒杀</a> </li>
+        <li class="li2"><a href="https://a.jd.com/" style="color: red; text-decoration: none; font-weight: 700;">优惠券</a></li>
+        <li class="li2"><a href="https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fplus.jd.com%2Findex%3Fflow_system%3Dappicon%26flow_entrance%3Dappicon11%26flow_channel%3Dpc" >PLUS会员</a> </li>
+        <li class="li2"><a href="https://red.jd.com/" >品牌闪购</a> </li>
+        <li class="li2"><a href="https://auction.jd.com/home.html" >拍卖</a></li>
+        <li class="li2"> <a href="https://jiadian.jd.com/" >京东家电</a></li>
+        <li class="li2"><a href="https://chaoshi.jd.com/" >京东超市</a> </li>
+        <li class="li2"><a href="https://fresh.jd.com/" >京东生鲜</a> </li>
+        <li class="li2"><a href="https://www.jd.hk/" >京东国际</a></li>
+        <li class="li2"><a href="https://www.jdcloud.com/cn/jdb2b" >京东云</a></li>
+    </ul></div> 
+    <div style="background: rgb(240, 240, 240); height: 800px;">
+<ul class="ul3" style="width: 180px;height: 480px;position: absolute;top: 200px;left: 150px; background-color: white;">
+    <li class="li3"><a href="https://jiadian.jd.com/" >家用电器</a> </li>
+    <li class="li3"> <a href="https://shouji.jd.com/">手机</a>/<a  href="https://wt.jd.com/">运营商</a>/<a  href="https://shuma.jd.com/">数码</a></li>
+    <li class="li3"><a href="https://diannao.jd.com/">电脑</a>/ <a href="https://bg.jd.com/">办公</a></li>
+    <li class="li3"><a href="https://list.jd.com/list.html?cat=1620">家居</a>/<a href="https://channel.jd.com/furniture.html">家具</a>/<a href="https://list.jd.com/list.html?cat=9855">家装</a>/<a href="https://channel.jd.com/kitchenware.html">厨具</a></li>
+    <li class="li3"><a href="https://phat.jd.com/10-603.html">男装</a>/<a href="https://phat.jd.com/10-507.html">女装</a>/<a href="https://phat.jd.com/10-156.html">童装</a>/<a href="https://channel.jd.com/underwear.html">内衣</a></li>
+    <li class="li3"><a href="https://beauty.jd.com/">美妆</a>/<a href="https://channel.jd.com/beauty.html">个护清洁</a>/<a href="https://channel.jd.com/pet.html">宠物</a></li>
+    <li class="li3"><a href="https://phat.jd.com/10-184.html">女鞋</a>/<a href="https://phat.jd.com/10-183.html">箱包</a>/<a href="https://pro.jd.com/mall/active/2BcJPCVVzMEtMUynXkPscCSsx68W/index.html">钟表</a>/<a href="https://channel.jd.com/jewellery.html">珠宝</a></li>
+    <li class="li3"><a href="https://phat.jd.com/10-185.html">男鞋</a>/<a href="https://phat.jd.com/10-109.html">运动</a>/<a href="https://phat.jd.com/10-272.html">户外</a></li>
+    <li class="li3"><a href="https://xinfang.jd.com/">房产</a>/<a href="https://car.jd.com/">汽车</a>/<a href="https://che.jd.com/">汽车用品</a></li>
+    <li class="li3"><a href="https://baby.jd.com/">母婴</a>/<a href="https://toy.jd.com/">玩具乐器</a></li>
+    <li class="li3"><a href="https://food.jd.com/">食品</a>/<a href="https://jiu.jd.com/">酒类</a>/<a href="https://fresh.jd.com/">生鲜</a>/<a href="https://china.jd.com/">特产</a></li>
+    <li class="li3"><a href="https://art.jd.com/">艺术</a>/<a href="https://channel.jd.com/1672-2599.html">礼品鲜花</a>/<a href="https://nong.jd.com/">农资绿植</a></li>
+    <li class="li3"><a href="https://health.jd.com/">医药保健</a>/<a href="https://channel.jd.com/9192-9196.html">计生情趣</a></li>
+    <li class="li3"><a href="https://book.jd.com/">图书</a>/<a href="https://mvd.jd.com/">文娱</a>/<a href="https://education.jd.com/">教育</a>/<a href="https://e.jd.com/">电子书</a></li>
+    <li class="li3"><a href="https://jipiao.jd.com/">机票</a>/<a href="https://hotel.jd.com/">酒店</a>/<a href="https://trip.jd.com/">旅游</a>/<a href="https://pro.jd.com/mall/active/3U1dkDb9bagM7FwUhScBL4rKva5R/index.html">生活</a></li>
+    <li class="li3"><a href="https://licai.jd.com/">理财</a>/<a href="https://pro.jd.com/mall/active/4EYjXQ6xjnM9TgeSjuMRE8ACEk6q/index.html">众筹</a>/<a href="https://www.jdt.com.cn/finance/">白条</a>/<a href="https://www.jdt.com.cn/finance/">保险</a></li>
+    <li class="li3"><a href="https://anzhuang.jd.com/">安装</a>/<a href="https://jdwx.jd.com/">维修</a>/<a href="https://cleanclean.jd.com/">清洗</a>/<a href="https://2.jd.com/">二手</a></li>
+    <li class="li3"><a href="https://mro.jd.com/">工业品</a></li>
+    </ul>
+    <div style="height: 500px; width: 1000px;background-color: rgb(216, 11, 11);position: absolute;left: 360px;top: 200px;">
+        <div id="demo" class="carousel slide" data-ride="carousel" style="height: 500px;width: 500px;position: relative;">
+ 
+            <!-- 指示符 -->
+            <ul class="carousel-indicators">
+              <li class="li" style="left: 10px;"></li>
+              <li class="li" style="left: 30px;"></li>
+              <li class="li" style="left: 50px;"></li>
+              <li class="li" style="left: 70px;"></li>
+              <li class="li" style="left: 90px;"></li>
+              <li class="li" style="left: 110px;"></li>
+              <li class="li" style="left: 130px;"></li>
+         
+            </ul>
+           
+            <!-- 轮播图片 -->
+            <div class="carousel-inner">
+              <a class="carousel-item" id="1" href="https://pro.jd.com/mall/active/3ZYfZKGRAhbHzJySpRriJoGWo8v6/index.html?innerAnchor=100026667858&focus=3">
+                <img src="https://tse1-mm.cn.bing.net/th/id/R-C.901f8ebdab22d065baefeae6c2701cc0?rik=Z3Hew18zFaF%2bLQ&riu=http%3a%2f%2fwww.pp3.cn%2fuploads%2f20120418lw%2f13.jpg&ehk=Es5ZGH90h%2foCghvlIwdKfUiqpO05gLSgOEBU2i0Mwok%3d&risl=&pid=ImgRaw&r=0">
+              </a>
+              <a class="carousel-item" id="2" href="https://lps.jd.com/pc/psp/1002007916?imup=ChIKDOWkp-eZveW5u-aDsxIAGAASEAjs2uXdAxDAaBoAINBfKAEYsBsgACogaWosdWUseGdjLGdpYSxjaWEsZl9iYV9mbF9sMTYzMzAyAmlqSqcBSXxTSFVOVF9JSixJX0FfRkxfSixJX0FfUkVfSixJX0FfUExfSixJX0FfU0xfSixJX0FfQ1NfSixJX0FfUlNfSixJX1VfRkxfSixJX1NfRkxfSixJX1JfRkxfSixJX1BfRkxfSixJX0dfUkxfSixJX0dfWEdfUixJX0JfRkxfUixHSUEsWEdDLFVBfDtGfE1JWFRBR19GUixGX0JBX0ZMX0wxNjMzMHw&extension_id=eyJhZCI6IjM1MDQiLCJjaCI6IjIiLCJza3UiOiIxMDAyMDA3OTE2IiwidHMiOiIxNjQ0MDUzNDIzIiwidW5pcWlkIjoie1wiY2xpY2tfaWRcIjpcIjI1OTcyNDYzLTc5ZjQtNDk5NS05NTM0LTQ1M2YxODNiODM4ZFwiLFwibWF0ZXJpYWxfaWRcIjpcIjgwNzM2MjIzMTEyMjE5MDM0NTdcIixcInBvc19pZFwiOlwiMzUwNFwiLFwic2lkXCI6XCI0MmQ1YWZjNi1kMGRkLTRjMWUtOTFiZC05ODAxMGJmZWMzNmNcIn0ifQ==&jd_pop=25972463-79f4-4995-9534-453f183b838d&abt=0">
+                <img src="https://tse1-mm.cn.bing.net/th/id/R-C.83253bf5007cd3cf05c315a8f3d0820b?rik=SDH41OT6GjdmlQ&riu=http%3a%2f%2fwww.desktx.com%2fd%2ffile%2fwallpaper%2fscenery%2f20170215%2ff2d0a76c4d45e7255022f3c511e8bd7a.jpg&ehk=St4XCEEUbOi7HWL7L77WZEyZp096qDgXF070s0sw3Lg%3d&risl=&pid=ImgRaw&r=0">
+              </a>
+              <a class="carousel-item" id="3" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+                <img src="https://tse1-mm.cn.bing.net/th/id/R-C.c6c03edea530e9caa677c9d17f193a4d?rik=MBgpsjumbTD5eQ&riu=http%3a%2f%2fwww.desktx.com%2fd%2ffile%2fwallpaper%2fscenery%2f20170209%2fca186d97701674b996264b2d352894a7.jpg&ehk=HunG%2fPF7pUbpcS34cWpNvlS%2faoDPbcaTYL6LFFPQIIM%3d&risl=&pid=ImgRaw&r=0">
+              </a>
+              <a class="carousel-item" id="4" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+                <img src="https://tse1-mm.cn.bing.net/th/id/R-C.15a1ba773a211acdeae39f83c2c13241?rik=h1wkOstFSHzvTg&riu=http%3a%2f%2fwww.desktx.com%2fd%2ffile%2fwallpaper%2fscenery%2f20170120%2ffdf948c82074494a74bf258eed4f855d.jpg&ehk=fYrgVtm0hD0sZn455mcVyf5k%2bQz7RScjHLMyUi6jG0A%3d&risl=&pid=ImgRaw&r=0">
+              </a>
+              <a class="carousel-item" id="5" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+                <img src="https://tse1-mm.cn.bing.net/th/id/R-C.dab436e6a9d23101d719c1f3dd1a76a4?rik=ecsSPgiqEPBeNQ&riu=http%3a%2f%2fwww.shijuepi.com%2fuploads%2fallimg%2f201115%2f1-2011151G454.jpg&ehk=61OG%2bh8posKeFHHqLOOPJLQh6brnOHElxrxY9xRbGY4%3d&risl=&pid=ImgRaw&r=0">
+              </a>
+              <a class="carousel-item" id="6" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+                <img src="https://tse1-mm.cn.bing.net/th/id/R-C.99c17a64707822ed071aa73b0f41fd02?rik=XHL2flZ2h8wgEw&riu=http%3a%2f%2fwww.dnzhuti.com%2fuploads%2fallimg%2f170323%2f95-1F323144449.jpg&ehk=aYX9ubjmsW26aNvEe2oJRJwuS%2bR8VHXQk0P3gqFgUd8%3d&risl=&pid=ImgRaw&r=0">
+              </a>
+              <a class="carousel-item" id="7" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+                <img src="https://img.zcool.cn/community/01c8f15aeac135a801207fa16836ae.jpg@1280w_1l_2o_100sh.jpg">
+              </a>
+
+            </div>
+           
+            <!-- 左右切换按钮 -->
+        <div id="left-right">
+            <div class="move" id="prev"><
+            </div>
+            <div class="move" id="next">>
+            </div>
+        </div>   
+          </div>
+          <a href="sp.html">
+    <img src="img\手机1.png" style="margin-top: 20px;height: 200px;width: 200px;">
+        </a>
+    </div>
+</div>
+
+
+</body>
+<script src="jd.js" type="module"></script>
+</html>
