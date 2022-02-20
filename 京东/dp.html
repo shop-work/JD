@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>店铺</title>
+    <style>
+        
+        .ul1{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow:hidden;
+            background-color: rgb(236, 236, 236);
+        }
+        .li1{
+            float: left;
+        }
+        .li1 a, .drop1-1{
+            display: block;
+            color: rgb(100, 100, 100);
+            text-align: center;
+            padding: 6px 10px 0px 20px;
+            text-decoration: none;
+            font-size: smaller;
+            border-left-color: rgb(100, 100, 100);
+            border-right-color: rgb(100, 100, 100);
+        }
+        .li1 a:hover, .drop1:hover, .drop1-1{
+            color: rgb(216, 11, 11);
+        }
+       .drop1{
+           display: inline-block;  
+       }
+       .drop2{
+           display: inline-block;
+       }
+       .drop3{
+           display:inline-block;
+       }
+       .drop1-1-1{
+           display: none;
+           position: absolute;
+          background-color: white;
+           min-width: 300px;
+           height: 150px;
+           
+           top: 33px;
+           list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow:hidden;
+            box-shadow:0px 8px 16px 0px rgba(0, 0, 0, 0.2) ;
+
+       }
+       .drop2-2-2{
+           display: none;
+           position: absolute;
+          background-color: white;
+           min-width: 1600px;
+           height: 180px;
+           top: 33px;
+           left: 100px;
+           z-index: +999;
+           box-shadow:0px 80px 80px 0px rgba(0, 0, 0, 0.2) ;
+       }
+       .drop3-3-3{
+           display: none;
+           position: absolute;
+          background-color: white;
+           min-width: 80px;
+           height: 80px;
+           top: 33px;
+           left: 1000px;
+           z-index: +999;
+           box-shadow:0px 80px 80px 0px rgba(0, 0, 0, 0.2) ;
+       }
+       .drop1-1-1 a{
+           color:rgb(100,100,100);
+           text-decoration: none;
+           display: block;
+           background-color:rgb(255, 255, 255);
+           font-size: x-small;
+           position: absolute;
+       }
+       .drop2-2-2 a{
+           color:rgb(100,100,100);
+           text-decoration: none;
+           display: block;
+           background-color:rgb(255, 255, 255);
+           font-size: x-small;
+         position: absolute;
+       }
+       .drop3-3-3 a{
+           color:rgb(100,100,100);
+           text-decoration: none;
+           display: block;
+           background-color:rgb(255, 255, 255);
+           font-size: x-small;
+         position: absolute;
+       }
+       
+       .drop2-2-2 ul{
+        list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow:hidden;
+            position: absolute; 
+            width: 400px;
+            display:inherit;
+            height: 180px;
+            position: absolute;
+           
+       }
+       .drop2-2-2 span{
+           font-weight: 400; 
+       }
+       .drop2-2-2 li{
+           height: 20px;
+           width: 300px;
+           padding-left: 30px;
+       }
+       .drop1-1-1 a:hover{
+           color:rgb(216, 11, 11);
+         
+       }
+       .drop2-2-2 a:hover{
+           color:rgb(216, 11, 11);
+         
+       }
+       .drop3-3-3 a:hover{
+           color:rgb(216, 11, 11);
+         
+       }
+       .drop1:hover .drop1-1-1{
+           display: block;
+       }
+       .drop2:hover .drop2-2-2{
+           display: block;
+       }
+       .drop3:hover .drop3-3-3{
+           display: block;
+       }
+  
+        .ul2{
+            list-style-type: none;
+            margin: 0;
+            padding-left: 200px;
+            overflow:hidden;
+          
+        }
+        .li2{
+            float: left;
+        }
+        .li2 a{
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            padding: 0px  20px;
+            color: #000;
+
+        }
+        .li2 a:hover{
+            color: rgb(216, 11, 11);
+        }
+
+     
+        #search1{
+            height: 30px;
+            width: 500px;
+            color: rgb(8, 8, 8); 
+            border: rgb(255, 4, 4) solid 2px;  
+            position: absolute;
+            left: 500px;
+            top: 80px;
+        }
+    
+        #search2{
+            height: 36px;
+            width: 60px;
+           background-color: rgb(240, 59, 59);
+           color: rgb(255, 255, 255);
+           border: none;   
+           position: absolute;
+           top: 80px; 
+           left: 1000px;  
+        }
+        .div5 ul{
+            margin-left: 1050px;
+           margin-top: -60px;
+        }
+      .div5 li{
+          list-style-type: none;
+          float: left;
+          height: 30px;
+          width: 100px;
+          color: rgb(100,100,100);
+  
+         font-size: small;
+         margin-left: 20px;
+         text-align: center;
+         line-height: 30px;
+         border: rgb(173, 173, 173) solid 1px;
+         border-radius: 3%;
+      }
+      .div5 a:hover{
+          color: red;
+      }
+      .dao{
+          background-color: white;
+      }
+      .dao .ul1 {
+          list-style-type: none;
+          margin-left: 20px;
+          float: left;
+         margin-top: 280px;
+         background-color: white;  
+      }
+      .dao .ul1:hover{
+          color: red;
+      }
+      #sj{
+          display: inline-block;
+      }
+      #ds{
+          display: inline-block;
+        
+      }
+      .ul2 {
+         height: 200px;
+        width: 1400px;
+        margin-top: 20px; 
+        z-index: +999;
+         display: none;
+        position: absolute;
+        background-color: white;
+      }
+      .ul3 {
+         height: 200px;
+        width: 1400px;
+        margin-top: 20px; 
+        z-index: +999;
+         display: none;
+        position: absolute;
+        background-color: white;
+      }
+      .ul4 {
+         height: 200px;
+        width: 1400px;
+        margin-top: 20px; 
+        z-index: +999;
+         display: none;
+        position: absolute;
+        background-color: white;
+      }
+      .ul5 {
+         height: 200px;
+        width: 1400px;
+        margin-top: 20px; 
+        z-index: +999;
+         display: none;
+        position: absolute;
+        background-color: white;
+      }
+      .ul6 {
+         height: 200px;
+        width: 1400px;
+        margin-top: 20px; 
+        z-index: +999;
+         display: none;
+        position: absolute;
+        background-color: white;
+      }
+      .ul7 {
+         height: 200px;
+        width: 1400px;
+        margin-top: 20px; 
+        z-index: +999;
+         display: none;
+        position: absolute;
+        background-color: white;
+      }
+ 
+     .ul2  li{
+          float: left; 
+           border-left: rgb(231, 224, 224) solid 1px;
+          list-style-type: none;
+          width: 150px;
+          height: 120px;
+      }
+      .ul3  li{
+          float: left; 
+           border-left: rgb(231, 224, 224) solid 1px;
+          list-style-type: none;
+          width: 150px;
+          height: 120px;
+      }
+      .ul4  li{
+          float: left; 
+           border-left: rgb(231, 224, 224) solid 1px;
+          list-style-type: none;
+          width: 150px;
+          height: 120px;
+      }
+      .ul5  li{
+          float: left; 
+           border-left: rgb(231, 224, 224) solid 1px;
+          list-style-type: none;
+          width: 150px;
+          height: 120px;
+      }
+      .ul6  li{
+          float: left; 
+           border-left: rgb(231, 224, 224) solid 1px;
+          list-style-type: none;
+          width: 150px;
+          height: 120px;
+      }
+      .ul7  li{
+          float: left; 
+           border-left: rgb(231, 224, 224) solid 1px;
+          list-style-type: none;
+          width: 150px;
+          height: 120px;
+      }
+      .dao img{
+          height: 120px;
+          width: 120px; 
+          padding-left: 20px;
+          padding-top: 30px;
+      }
+#sj:hover .ul2{
+   display: block;
+}
+#ds:hover .ul3{
+   display: block;
+}
+#yz:hover .ul4{
+   display: block;
+}
+#yx:hover .ul5{
+   display: block;
+}
+#kt:hover .ul6{
+   display: block;
+}
+#zb:hover .ul7{
+   display: block;
+}
+
+       /*----------------------------------------------------------------------------------------------------------------------------------------*/
+       #demo .carousel-item{
+           position: absolute;
+           width: 1500px;
+           height: 600px;
+           overflow: hidden;
+          
+       }
+       #demo .carousel-indicators{
+        position: absolute;
+        list-style-type: none;
+       }
+       #demo .carousel-indicators li{
+           height: 10px;
+           width: 10px;
+           border-radius: 50%;
+           float: left;
+           background-color: rgba(255, 255, 255, 0.281);
+           z-index: +999;
+          position: absolute;
+          top: 450px;
+       }
+
+       #demo #left-right .move{
+           position: absolute;
+           margin-top: 260px;
+           height: 30px;
+           width: 20px;
+           font-size: 20px;
+           padding-left: 10px;
+           z-index: +99;
+           background-color: rgba(0, 0, 0, 0.308);
+           color: rgb(255, 255, 255);
+       }
+       #demo #left-right #next {
+           left:1470px ;
+           position: absolute;
+       }
+       #demo li:hover{
+           background-color: white;
+       }
+       #demo #left-right .move:hover{
+           background-color: rgba(0, 0, 0, 0.733);
+       }
+    </style>
+</head>
+<body>
+    <ul class="ul1" style="height: 30px;background-color: rgb(231, 224, 224); font-weight: 100; padding-left: 450px;font-size: x-small;">
+     <div class="drop3">
+          <li class="li1"> <a class="drop3-3" href="登录页面.html" class="span1" id="username" value="username">denglu</a></li> 
+     <div class="drop3-3-3">
+        <a style="position: absolute;top: 20px;left: 10px;" href="my.html">我的京东</a><a style="position: absolute;top: 40px;left: 10px;">退出</a>
+     </div>
+       </div>
+       <li class="li1"><a  href="注册页面.html" style=" color: rgb(253, 55, 55);">免费注册</a></li>   
+       <li class="li1"><a  href="dd.html">我的订单</a></li>  
+       <div class="drop1" >
+            <li class="li1"><a class="drop1-1" href="my.html">我的京东</a></li>
+            <ul class="drop1-1-1"style="z-index: +999;">
+               <li> <a style="left: 10px; top: 10px;" href="dd.html">待处理订单</a><a style="left: 150px; top: 10px;">我的问答</a></li>
+               <li> <a style="left: 10px; top: 35px;">返修退换货</a><a style="left: 150px; top: 35px;">我的关注</a></li>
+               <li>  <a style="left: 10px; top: 60px;">降价商品</a></li>
+               <li> <a style="left: 10px; top: 85px;">我的京豆</a><a style="left: 150px; top: 85px;">我的优惠券</a></li>
+               <li> <a style="left: 10px; top: 110px;">我的白条</a><a style="left: 150px; top: 110px;">我的理财</a></li>
+            </ul>
+        </div>
+      
+       <li class="li1"><a class="span1" >京东会员</a>  </li>
+       <li class="li1"><a class="span" style="color: rgb(253, 55, 55);">政企采购</a> </li>
+       <li class="li1"><a class="span1">客户服务</a> </li>
+       <div class="drop2">
+       <li class="li1"><a class="drop2-2">网站导航</a> </li>
+       <div class="drop2-2-2">
+       <ul id="div1" style="position: absolute;left: 100px;">
+           <span>特色主题</span>
+           <li ><a style="top: 20px;left: 0px;" href="https://new.jd.com/">新品首发</a><a style="left: 80px; top: 20px;" href="https://www.jdt.com.cn/finance/">京东金融</a><a style="left: 160px;top: 20px;" href="https://global.jd.com/">全球售</a><a style="left: 240px; top: 20px;" href="https://www.joybuy.com/">国际站</a></li>
+           <li><a style="left: 0px;top: 45px;" href="https://vip.jd.com/">京东会员</a><a style="top: 45px;left: 80px;" href="https://tw.jd.com/">台湾售</a><a style="top: 45px;left: 160px;" href="https://www.jd.ru/">俄语站</a><a style="top: 45px;left: 240px;" href="https://diy.jd.com/#/recommend">装机大师</a></li>
+           <li><a style="left: 0px; top: 70px;" href="https://hk.jd.com/">港澳售</a><a style="top: 70px;left: 80px;" href="https://a.jd.com/">优惠券</a><a href="https://red.jd.com/" style="top: 70px;left: 160px;">秒杀</a><a style="top: 70px;left: 240px;">闪购</a></li>
+           <li><a style="left:0px;top: 95px;" href="https://www.jd.id/">印尼站</a><a href="https://www.jd.id/" style="top: 95px;left: 80px;">陪伴计划</a><a href="https://join.jd.com/" style="top: 95px;left: 160px;">出海招商</a><a style="top: 95px;left: 240px;" href="https://join.jd.com/">拍拍二手</a></li>
+           <li><a style="left: 0px;top: 120px;" href="https://wqs11.jd.com/data/coss/recoverydata/45/fe2c4ab59833605dc85b41b408b70e3d.shtml?tpl=index?err=52">买什么</a></li>
+       </ul>
+       <ul id="div2" style="position: absolute;left: 400px;">
+           <span>行业频道</span>
+           <li><a style="top: 20px;left: 0px;" href="https://shouji.jd.com/">手机</a><a href="https://shouji.jd.com/" style="left: 80px; top: 20px;">智能数码</a><a https://shouji.jd.com/ style="left: 160px; top: 20px;">电脑办公</a></li>
+           <li><a style="left: 0px; top: 45px;" href="https://shouji.jd.com/">家用电器</a><a style="left: 80px; top: 45px;"href="https://hk.jd.com/">京东小家</a><a style="left: 160px; top: 45px;"href="https://hk.jd.com/">京东服饰</a></li>
+           <li><a style="left: 0px; top: 70px;" href="https://hk.jd.com/">京东生鲜</a><a style="left: 80px; top: 70px;"href="https://hk.jd.com/">家装城</a><a style="left: 160px; top: 70px;"href="https://hk.jd.com/">母婴</a></li>
+           <li><a style="left: 0px; top: 95px;" href="https://hk.jd.com/">食品</a><a style="left: 80px; top: 95px;" href="https://hk.jd.com/">农资频道</a><a style="left: 160px; top: 95px;" href="https://hk.jd.com/">整车</a></li>
+           <li><a style="left: 0px; top: 120px;" href="https://hk.jd.com/">图书</a><a style="left: 80px; top: 120px;" href="https://hk.jd.com/">劳动防护</a></li>
+       </ul>
+       <ul id="div3" style="position: absolute;left: 700px;">
+        <span>生活服务</span>
+        <li><a style="top: 20px;left: 0px;" href="https://hk.jd.com/">京东众筹</a><a  href="https://hk.jd.com/"style="left: 80px; top: 20px;">白条</a><a href="https://hk.jd.com/"style="left: 160px; top: 20px;">京东金融APP</a></li>
+        <li><a style="top: 45px;left: 0px;" href="https://hk.jd.com/">京东小金库</a><a  href="https://hk.jd.com/"style="left: 80px; top: 45px;">理财</a><a href="https://hk.jd.com/" style="left: 160px; top: 45px;">话费</a></li>
+        <li><a style="top: 70px;left: 0px;" href="https://hk.jd.com/">水电煤</a><a  href="https://hk.jd.com/"style="left: 80px; top: 70px;">彩票</a><a href="https://hk.jd.com/"style="left: 160px; top: 70px;">旅行</a></li>
+        <li><a style="top: 95px;left: 0px;" href="https://hk.jd.com/">机票酒店</a><a href="https://hk.jd.com/" style="left: 80px; top: 95px;">电影票</a><a href="https://hk.jd.com/"style="left: 160px; top: 95px;">京东到家</a></li>
+        <li><a style="top: 120px;left: 0px;" href="https://hk.jd.com/">游戏</a><a href="https://hk.jd.com/"style="left: 80px; top: 120px;">拍拍回收</a></li>
+       </ul>
+    <ul id="div4" style="display: inherit; height: 180px;width: 300px;position: absolute;left: 1000px; ">
+        <span>更多精选</span>
+        <li><a style="top: 20px;left: 0px;">合作招商</a><a style="left: 80px; top: 20px;">京东通信</a><a style="left: 160px; top: 20px;">京东王卡</a></li>
+        <li><a style="top: 45px;left: 0px;">企业采购</a><a style="left: 80px; top: 45px;">服务市场</a><a style="left: 160px; top: 45px;">办公生活馆</a></li>
+        <li><a style="top: 70px;left: 0px;">校园加盟</a><a style="left: 80px; top: 70px;">京东社区</a><a style="left: 160px; top: 70px;">游戏社区</a></li>
+        <li><a style="top: 95px;left: 0px;">知识产权维权</a><a style="left: 80px; top: 95px;">关于我们</a><a style="left: 160px; top: 95px;">京东安联保险</a></li>
+        
+    </ul>
+       </div>
+    </div>
+       <li class="li1"><a class="span1">手机京东</a> </li>
+       <li class="li1"><a class="span1">网站无障碍</a></li>
+    </ul>
+    <div class="div5">
+        <img src="img\京东.png" height="80px" style="margin-top:20px;margin-left: 150px;">
+        <input type="text" id="search1"><input type="submit" value="搜 索" id="search2">
+        <ul>
+       <li> <a href="my.html" style="text-decoration: none;">我的京东</a></li>
+        <li><a>去购物车</a></li>
+        </ul>
+        <img src="img\屏幕截图 2022-02-10 174709.jpg" width="1300px" style="margin-top: 30px; margin-left: 100px;" >
+    </div>
+    <div class="dao">
+        <ul>
+            <li class="ul1"  style="position: absolute; left: 230px;top: 0px;"><a>首页</a></li>
+            <div id="sj">
+            <li  class="ul1"  style="position: absolute; left: 300px;top: 0px;"><a>小米手机</a></li>
+                <div class="ul2">
+                        <li><img src="img\手机1.png"></li>
+                        <li><img src="img\手机2.png"></li>
+                        <li><img src="img\手机5.png"></li>
+                        <li><img src="img\手机6.png"></li>
+                        <li><img src="img\手机3.png"></li>
+                        <li><img src="img\手机4.png"></li>
+                        <li><img src="img\手机7.png"></li>
+                </div>
+            </div>
+            <div id="ds">
+            <li class="ul1"  style="position: absolute; left: 400px; top: 0px;"><a>小米电视</a></li>
+            <div class="ul3">
+                <li><img src="img\ds1.png"></li>
+                <li><img src="img\ds2.png"></li>
+                <li><img src="img\ds1.png"></li>
+                <li><img src="img\ds2.png"></li>
+                <li><img src="img\ds1.png"></li>
+                <li><img src="img\ds2.png"></li>
+                <li><img src="img\ds2.png"></li>
+            </div>
+            </div>
+           
+            <li class="ul1"  style="position: absolute; left: 500px; top: 0px;"><a>小米笔记本</a></li>
+             <div id="yz">
+            <li class="ul1"  style="position: absolute; left: 600px;top: 0px;"><a>冰洗烟灶</a></li>
+            <div class="ul4">
+                <li><img src="img\yz1.png"></li>
+                <li><img src="img\春节5.png"></li>
+                <li><img src="img\春节8.png"></li>
+                <li><img src="img\ds2.png"></li>
+                <li><img src="img\ds1.png"></li>
+                <li><img src="img\yz1.png"></li>
+                <li><img src="img\春节5.png"></li>
+            </div>
+             </div>
+            <li class="ul1"  style="position: absolute; left: 700px;top: 0px;"><a>潮流小电</a></li>
+            <div id="yx">
+            <li class="ul1"  style="position: absolute; left: 800px;top: 0px;"><a>路由音响</a></li>
+            <div class="ul5">
+                <li><img src="img\ds1.png"></li>
+                <li><img src="img\ds2.png"></li>
+                <li><img src="img\ds1.png"></li>
+                <li><img src="img\ds2.png"></li>
+                <li><img src="img\ds1.png"></li>
+                <li><img src="img\ds2.png"></li>
+                <li><img src="img\ds2.png"></li>
+            </div>
+            </div>
+            <li class="ul1"  style="position: absolute; left: 900px;top: 0px;"><a>智能穿戴</a></li>
+            <li class="ul1"  style="position: absolute; left: 1000px;top: 0px;"><a>智能家居</a></li>
+            <div id="kt">
+            <li class="ul1"  style="position: absolute; left: 1100px;top: 0px;"><a>小米空调</a></li>
+            <div class="ul6">
+                <li><img src="img\yz1.png"></li>
+                <li><img src="img\春节5.png"></li>
+                <li><img src="img\春节8.png"></li>
+                <li><img src="img\ds2.png"></li>
+                <li><img src="img\ds1.png"></li>
+                <li><img src="img\yz1.png"></li>
+                <li><img src="img\春节5.png"></li>
+            </div>
+             </div>
+             <div id="zb">
+            <li class="ul1"  style="position: absolute; left: 1200px;top: 0px;"><a>配件周边</a></li>
+            <div class="ul7">
+                <li><img src="img\手机1.png"></li>
+                <li><img src="img\手机2.png"></li>
+                <li><img src="img\手机5.png"></li>
+                <li><img src="img\手机6.png"></li>
+                <li><img src="img\手机3.png"></li>
+                <li><img src="img\手机4.png"></li>
+                <li><img src="img\手机7.png"></li>
+        </div>
+    </div> 
+    </div>
+    <div id="demo" class="carousel slide" data-ride="carousel" style="height: 500px;width: 500px;position: relative;">
+ 
+        <!-- 指示符 -->
+        <ul class="carousel-indicators">
+          <li class="li" style="left: 10px;"></li>
+          <li class="li" style="left: 30px;"></li>
+          <li class="li" style="left: 50px;"></li>
+          <li class="li" style="left: 70px;"></li>
+          <li class="li" style="left: 90px;"></li>
+          <li class="li" style="left: 110px;"></li>
+          <li class="li" style="left: 130px;"></li>
+     
+        </ul>
+       
+        <!-- 轮播图片 -->
+        <div class="carousel-inner">
+          <a class="carousel-item" id="1" href="https://pro.jd.com/mall/active/3ZYfZKGRAhbHzJySpRriJoGWo8v6/index.html?innerAnchor=100026667858&focus=3">
+            <img src="https://tse1-mm.cn.bing.net/th/id/R-C.901f8ebdab22d065baefeae6c2701cc0?rik=Z3Hew18zFaF%2bLQ&riu=http%3a%2f%2fwww.pp3.cn%2fuploads%2f20120418lw%2f13.jpg&ehk=Es5ZGH90h%2foCghvlIwdKfUiqpO05gLSgOEBU2i0Mwok%3d&risl=&pid=ImgRaw&r=0">
+          </a>
+          <a class="carousel-item" id="2" href="https://lps.jd.com/pc/psp/1002007916?imup=ChIKDOWkp-eZveW5u-aDsxIAGAASEAjs2uXdAxDAaBoAINBfKAEYsBsgACogaWosdWUseGdjLGdpYSxjaWEsZl9iYV9mbF9sMTYzMzAyAmlqSqcBSXxTSFVOVF9JSixJX0FfRkxfSixJX0FfUkVfSixJX0FfUExfSixJX0FfU0xfSixJX0FfQ1NfSixJX0FfUlNfSixJX1VfRkxfSixJX1NfRkxfSixJX1JfRkxfSixJX1BfRkxfSixJX0dfUkxfSixJX0dfWEdfUixJX0JfRkxfUixHSUEsWEdDLFVBfDtGfE1JWFRBR19GUixGX0JBX0ZMX0wxNjMzMHw&extension_id=eyJhZCI6IjM1MDQiLCJjaCI6IjIiLCJza3UiOiIxMDAyMDA3OTE2IiwidHMiOiIxNjQ0MDUzNDIzIiwidW5pcWlkIjoie1wiY2xpY2tfaWRcIjpcIjI1OTcyNDYzLTc5ZjQtNDk5NS05NTM0LTQ1M2YxODNiODM4ZFwiLFwibWF0ZXJpYWxfaWRcIjpcIjgwNzM2MjIzMTEyMjE5MDM0NTdcIixcInBvc19pZFwiOlwiMzUwNFwiLFwic2lkXCI6XCI0MmQ1YWZjNi1kMGRkLTRjMWUtOTFiZC05ODAxMGJmZWMzNmNcIn0ifQ==&jd_pop=25972463-79f4-4995-9534-453f183b838d&abt=0">
+            <img src="https://tse1-mm.cn.bing.net/th/id/R-C.83253bf5007cd3cf05c315a8f3d0820b?rik=SDH41OT6GjdmlQ&riu=http%3a%2f%2fwww.desktx.com%2fd%2ffile%2fwallpaper%2fscenery%2f20170215%2ff2d0a76c4d45e7255022f3c511e8bd7a.jpg&ehk=St4XCEEUbOi7HWL7L77WZEyZp096qDgXF070s0sw3Lg%3d&risl=&pid=ImgRaw&r=0">
+          </a>
+          <a class="carousel-item" id="3" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+            <img src="https://tse1-mm.cn.bing.net/th/id/R-C.c6c03edea530e9caa677c9d17f193a4d?rik=MBgpsjumbTD5eQ&riu=http%3a%2f%2fwww.desktx.com%2fd%2ffile%2fwallpaper%2fscenery%2f20170209%2fca186d97701674b996264b2d352894a7.jpg&ehk=HunG%2fPF7pUbpcS34cWpNvlS%2faoDPbcaTYL6LFFPQIIM%3d&risl=&pid=ImgRaw&r=0">
+          </a>
+          <a class="carousel-item" id="4" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+            <img src="https://tse1-mm.cn.bing.net/th/id/R-C.15a1ba773a211acdeae39f83c2c13241?rik=h1wkOstFSHzvTg&riu=http%3a%2f%2fwww.desktx.com%2fd%2ffile%2fwallpaper%2fscenery%2f20170120%2ffdf948c82074494a74bf258eed4f855d.jpg&ehk=fYrgVtm0hD0sZn455mcVyf5k%2bQz7RScjHLMyUi6jG0A%3d&risl=&pid=ImgRaw&r=0">
+          </a>
+          <a class="carousel-item" id="5" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+            <img src="https://tse1-mm.cn.bing.net/th/id/R-C.dab436e6a9d23101d719c1f3dd1a76a4?rik=ecsSPgiqEPBeNQ&riu=http%3a%2f%2fwww.shijuepi.com%2fuploads%2fallimg%2f201115%2f1-2011151G454.jpg&ehk=61OG%2bh8posKeFHHqLOOPJLQh6brnOHElxrxY9xRbGY4%3d&risl=&pid=ImgRaw&r=0">
+          </a>
+          <a class="carousel-item" id="6" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+            <img src="https://tse1-mm.cn.bing.net/th/id/R-C.99c17a64707822ed071aa73b0f41fd02?rik=XHL2flZ2h8wgEw&riu=http%3a%2f%2fwww.dnzhuti.com%2fuploads%2fallimg%2f170323%2f95-1F323144449.jpg&ehk=aYX9ubjmsW26aNvEe2oJRJwuS%2bR8VHXQk0P3gqFgUd8%3d&risl=&pid=ImgRaw&r=0">
+          </a>
+          <a class="carousel-item" id="7" href="https://prodev.jd.com/mall/active/4MmNbTkve7YDv3cqfN65jyU54rSB/index.html">
+            <img src="https://img.zcool.cn/community/01c8f15aeac135a801207fa16836ae.jpg@1280w_1l_2o_100sh.jpg">
+          </a>
+
+        </div>
+       
+        <!-- 左右切换按钮 -->
+    <div id="left-right">
+        <div class="move" id="prev"><
+        </div>
+        <div class="move" id="next">>
+        </div>
+    </div>   
+      </div>
+    <img src="img\广告1.png" style="margin-top: 50px;margin-left: 300px;">
+      <script>
+          
+var demo=document.getElementById('demo')
+var picture=document.getElementsByClassName('carousel-item')
+var li=document.getElementsByClassName('li')
+var prev=document.getElementById('prev')
+var next=document.getElementById('next')
+var len=picture.length
+ var   index=0
+  var  timer=null 
+    function solide(){
+        li.onmouseover=function(){
+            if(timer){
+                clearInterval(timer);
+            }
+        }
+    
+        li.onmouseout=function(){
+            timer=setInterval(function(){
+            index++;
+            if(index>=len){
+                index=0;
+            }
+            changImg();
+        },3000);
+        }
+        li.onmouseout();
+        for( var j=0;j<len;j++){
+            li[j].index=j;
+            li[j].onclick=function(){
+                index=this.index;
+                changImg();
+            }
+        }
+        prev.onclick=function(){
+            index--;
+            if(index<0){
+                index=len-1;
+            }
+            changImg();
+        }
+        next.onclick=function(){
+            index++;
+           if(index>len){
+               index=0;
+           }
+           changImg();
+        }
+    }
+        solide();
+     function changImg(){
+            for(var i=0;i<len;i++){
+                picture[i].style.display='none';
+           
+            }
+            picture[index].style.display='block';
+     
+        }
+      </script>

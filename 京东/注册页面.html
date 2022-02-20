@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册页面</title>
+</head>
+<body>
+    <form action="">
+    <input id="username" type="text" placeholder="请输入用户名/手机/邮箱" style="width: 400px; height: 50px; position: absolute; left: 40%; top: 40%;" >
+    <input id="password" type="password" placeholder="密码" style="width: 400px; height: 50px; position: absolute; left: 40%; top: 50%;">
+    <input id="button" type="submit" value="注    册" style="border: none; color: rgb(255, 255, 255); width: 400px; height: 50px; position: absolute; left: 40%; top: 60%; background-color: rgb(221, 46, 46); font-size: larger;" >
+</form>
+<a href="jd.html" style="text-decoration: none;position: absolute;left: 850px;top: 520px;">返回首页</a>
+<script>
+
+ var button=document.getElementById("button");
+  button.onclick = function () {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        
+        if(username==""||username==null){
+            alert("用户名为空"); 
+            return false;
+        }
+        if(password==""||password==null){
+            alert("密码为空");
+            return false;
+        }
+        if(password.length<6 ||password.length>20 || username.length>20)
+        {
+            alert("输入出错");
+            return false;
+
+        }
+        else{
+            alert("注册成功,请返回登录");  
+            return true;
+        }
+  }     
+  fetch("http://101.43.160.254:8000/api/user", {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+        'Content-Type': 'application/json'
+    }, 
+    body: JSON.stringify({
+        firstParam: 'username',
+         secondParam: 'password', }) }).then(function(res){
+　　    console.log(res)
+    })
+    fetch("http://101.43.160.254:8080/api/user/info", {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+        'Content-Type': 'application/json'
+    }, 
+    body: JSON.stringify({
+        firstParam: 'username',
+         secondParam: 'password', }) }).then(function(res){
+　　    console.log(res)
+    })
+
+   
+
+</script>
+</body>
+</html>
