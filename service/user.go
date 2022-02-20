@@ -65,25 +65,57 @@ func (u *UserService) IsPasswordReasonable(password string) bool {
 	return true
 }
 
-//添加电话
-func (u *UserService) AddPhone(username string, phone string) error {
+// UpdatePhone 更新电话
+func (u *UserService) UpdatePhone(username string, phone string) error {
 	d := dao.UserDao{}
-	err := d.AddPhone(username, phone)
+	err := d.UpdatePhone(username, phone)
 	return err
 }
 
-//充值
-func (u *UserService) AddMoney(username string, money float32) error {
-	d := dao.UserDao{}
-	err := d.AddMoney(username, money)
-	return err
-}
-
-//获取个人信息
-func (u *UserService) GetUserinfo(username string) (user model.User, err error) {
+// GetUserinfoByUserName 根据username获取个人信息
+func (u *UserService) GetUserinfoByUserName(username string) (user model.User, err error) {
 	d := dao.UserDao{}
 	user, err = d.SelectUserByUsername(username)
 	return user, err
 }
 
-//查看余额
+// GetBasicUserinfo 获取用户固定信息
+func (u *UserService) GetBasicUserinfo(username string) (user model.User, err error) {
+	d := dao.UserDao{}
+	user, err = d.SelectBasicUserByUsername(username)
+	return user, err
+}
+
+// UpdateName 更新昵称
+func (u *UserService) UpdateName(username string, name string) error {
+	d := dao.UserDao{}
+	err := d.UpdateName(username, name)
+	return err
+}
+
+func (u *UserService) UpdateGender(username string, gender string) error {
+	d := dao.UserDao{}
+	err := d.UpdateGender(username, gender)
+	return err
+}
+
+func (u *UserService) UpdateAddressId(username string, id int) error {
+	d := dao.UserDao{}
+	return d.UpdateAddressId(username, id)
+}
+
+func (u *UserService) UpdateGroupId(username string, i int) error {
+	d := dao.UserDao{}
+	return d.UpdateGroupId(username, i)
+}
+
+func (u *UserService) AddStoreUser(username string, sid int) error {
+	d := dao.UserDao{}
+	return d.AddStoreUser(username, sid)
+}
+
+func (u *UserService) UpdateMoney(username string, money float32) error {
+	d := dao.UserDao{}
+	return d.UpdateMoney(username, money)
+
+}

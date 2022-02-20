@@ -58,12 +58,3 @@ func (trie *Trie) StartsWith(prefix []interface{}) bool {
 	}
 	return true
 }
-
-// CheckIfSensitive 检查敏感词
-func CheckIfSensitive(s string) bool {
-	sensitiveWords = append(sensitiveWords, "你妈", "傻逼")
-	trie := NewTrie()
-	trie.Insert(sensitiveWords)
-	bt := []interface{}{s}
-	return trie.StartsWith(bt)
-}

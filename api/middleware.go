@@ -8,9 +8,13 @@
 package api
 
 import (
+	"encoding/base64"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"shop/service"
 	"shop/tool"
+	"strings"
 )
 
 func Cors() gin.HandlerFunc {
@@ -28,6 +32,7 @@ func Cors() gin.HandlerFunc {
 	}
 }
 
+/* cookie验证
 func auth(ctx *gin.Context) {
 	username, err := ctx.Cookie("username")
 	if err != nil {
@@ -35,5 +40,36 @@ func auth(ctx *gin.Context) {
 		ctx.Abort()
 	}
 	ctx.Set("iUsername", username)
+	ctx.Next()
+}*/
+
+//jwt验证
+func jwtAuth(ctx *gin.Context) {
+	token := ctx.PostForm("token")
+	if token == "" {
+		tool.RespSuccessfulWithData(ctx, "token为空")
+		ctx.Abort()
+		return
+	}
+
+	// 解析到控制台
+	jwt := strings.Split(token, ".")
+	cnt := 0
+	for _, val := range jwt {
+		cnt++
+		if cnt == 3 {
+			break
+		}
+		msg, _ := base64.StdEncoding.DecodeString(val)
+		fmt.Println("val ->", string(msg))
+	}
+	mc, err := service.ParseToken(token)
+	if err != nil {
+		fmt.Println("jwtAuthErr:", err.Error())
+		tool.RespSuccessfulWithData(ctx, "token无效")
+		ctx.Abort()
+		return
+	}
+	ctx.Set("iUsername", mc.User.Username)
 	ctx.Next()
 }

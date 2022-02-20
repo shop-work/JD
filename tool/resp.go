@@ -14,31 +14,35 @@ import (
 
 func RespErrorWithData(ctx *gin.Context, data interface{}) {
 	ctx.JSON(http.StatusOK, gin.H{
-		"info": data,
+		"status": false,
+		"data":   data,
 	})
 }
 
 func RespInternalError(ctx *gin.Context) {
 	ctx.JSON(http.StatusInternalServerError, gin.H{
-		"info": "服务器错误",
+		"status": false,
+		"data":   "服务器错误",
 	})
 }
 
 func RespSuccessful(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
-		"info": "成功",
+		"status": true,
+		"data":   "成功",
 	})
 }
 
 func RespSuccessfulWithData(ctx *gin.Context, data interface{}) {
 	ctx.JSON(http.StatusOK, gin.H{
-		"info": "成功",
-		"data": data,
+		"status": true,
+		"data":   data,
 	})
 }
 
 func RespSensitiveError(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
-		"data": "含有非法词汇",
+		"status": false,
+		"data":   "含有非法词汇",
 	})
 }

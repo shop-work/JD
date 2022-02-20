@@ -20,19 +20,19 @@ import (
 func register(ctx *gin.Context) {
 	username := ctx.PostForm("username")
 	password := ctx.PostForm("password")
+	name := ctx.PostForm("name") //昵称
 
 	//检验用户名是否含有敏感词
 	flag := tool.CheckIfSensitive(username)
-	if flag {
+	flag2 := tool.CheckIfSensitive(name)
+	if flag || flag2 {
 		tool.RespSensitiveError(ctx)
 		return
 	}
 
-	user := model.User{
-		Username: username,
-		Password: password,
-	}
 	u := service.UserService{}
+
+	//用户名是否已存在
 	flag, err := u.IsExistUsername(username)
 	if err != nil {
 		fmt.Println("judge exist username err:", err)
@@ -49,15 +49,30 @@ func register(ctx *gin.Context) {
 		tool.RespErrorWithData(ctx, "密码不合理")
 		return
 	}
+	if name == "" {
+		name = "匿名用户"
+	}
+
+	user := model.User{
+		Username: username,
+		Password: password,
+		Name:     name,
+	}
 
 	err = u.Register(user)
 	if err != nil {
-		fmt.Println("judge repeat username err: ", err)
+		fmt.Println("register err: ", err)
 		tool.RespInternalError(ctx)
 		return
 	}
 
-	tool.RespSuccessfulWithData(ctx, "注册成功")
+	ctx.JSON(200, gin.H{
+		"status":   true,
+		"data":     "注册成功",
+		"username": username,
+		"name":     name,
+		"groupId":  0,
+	})
 }
 
 //登陆
@@ -77,51 +92,151 @@ func login(ctx *gin.Context) {
 		return
 	}
 
-	//设置cookie
-	ctx.SetCookie("username", username, 3600, "/", "", false, false)
+	//获取用户固定信息
+	basicUserinfo, err := u.GetBasicUserinfo(username)
+	if err != nil {
+		fmt.Println("getBasicUserInfo err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+	//创建token
+	tokenString, err := service.CreateToken(basicUserinfo, 12000, "TOKEN")
+	if err != nil {
+		fmt.Println("create token err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+	//创建refreshToken
+	refreshTokenString, err := service.CreateToken(basicUserinfo, 120000, "TOKEN")
+	if err != nil {
+		fmt.Println("create token err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
 
-	tool.RespSuccessfulWithData(ctx, "欢迎您~"+username)
+	ctx.JSON(200, gin.H{
+		"status":       true,
+		"data":         "登陆成功",
+		"uid":          basicUserinfo.Uid,
+		"groupId":      basicUserinfo.GroupId,
+		"token":        tokenString,
+		"refreshToken": refreshTokenString,
+	})
+
 }
 
 //给某用户充值
 func addMoney(ctx *gin.Context) {
+	//username为空则给自己充值
 	username := ctx.PostForm("username")
+	if username == "" {
+		iUsername, _ := ctx.Get("iUsername")
+		username = iUsername.(string)
+	}
+
 	money := ctx.PostForm("money")
+	if money == "" {
+		tool.RespErrorWithData(ctx, "充值金额错误")
+		return
+	}
 	fMoney, err := strconv.ParseFloat(money, 32)
 	if err != nil {
 		fmt.Println("money string to float err:", err)
-		tool.RespInternalError(ctx)
+		tool.RespErrorWithData(ctx, "充值金额错误")
+		return
+	}
+	if fMoney <= 0 {
+		tool.RespErrorWithData(ctx, "充值金额错误")
 		return
 	}
 	u := service.UserService{}
-	err = u.AddMoney(username, float32(fMoney))
+	//是否存在该用户
+	flag, err := u.IsExistUsername(username)
+	if !flag {
+		tool.RespErrorWithData(ctx, "username无效")
+		return
+	}
+	user, err := u.GetUserinfoByUserName(username)
+	if err != nil {
+		fmt.Println("get userinfo err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+	err = u.UpdateMoney(username, user.Money+float32(fMoney))
 	if err != nil {
 		fmt.Println("addMoney err:", err)
 		tool.RespInternalError(ctx)
 	}
 
-	tool.RespErrorWithData(ctx, "成功充值"+money+"元")
+	tool.RespSuccessfulWithData(ctx, "给用户"+username+"成功充值"+money+"元!")
 }
 
-//完善信息
+//更新信息
 func changeInformation(ctx *gin.Context) {
 	iUsername, _ := ctx.Get("iUsername")
 	username := iUsername.(string)
 	u := service.UserService{}
 
-	//添加电话
+	//更新电话
 	phone := ctx.PostForm("phone")
+
 	if phone != "" {
-		err := u.AddPhone(username, phone)
+		if len(phone) != 11 {
+			tool.RespErrorWithData(ctx, "phone无效")
+			return
+		}
+		err := u.UpdatePhone(username, phone)
 		if err != nil {
-			fmt.Println("AddPhone err:", err)
+			fmt.Println("UpdatePhone err:", err)
 			tool.RespInternalError(ctx)
 			return
 		}
 	}
 
-	//添加昵称
-	//添加收货地址
+	//更新昵称
+	name := ctx.PostForm("name")
+	if name != "" {
+		flag := tool.CheckIfSensitive(name)
+		if flag {
+			tool.RespErrorWithData(ctx, "name格式不符合要求")
+			return
+		}
+		err := u.UpdateName(username, name)
+		if err != nil {
+			fmt.Println("update name err:", err)
+			tool.RespInternalError(ctx)
+			return
+		}
+	}
+
+	//更新性别
+	gender := ctx.PostForm("gender")
+	if gender != "" {
+		err := u.UpdateGender(username, gender)
+		if err != nil {
+			fmt.Println("update gender err:", err)
+			tool.RespInternalError(ctx)
+			return
+		}
+	}
+
+	//默认选择的收货地址修改
+	iAddressId := ctx.PostForm("address_id") //检查该addressId是否有效
+	if iAddressId != "" {
+		addressId, err := strconv.Atoi(iAddressId)
+		if err != nil {
+			fmt.Println("addressId to int err:", err)
+			tool.RespInternalError(ctx)
+			return
+		}
+		err = u.UpdateAddressId(username, addressId)
+		if err != nil {
+			fmt.Println("update addressId err:", err)
+			tool.RespInternalError(ctx)
+			return
+		}
+	}
+
 	tool.RespSuccessful(ctx)
 }
 
@@ -131,14 +246,13 @@ func viewUserInfo(ctx *gin.Context) {
 	username := iUsername.(string)
 	u := service.UserService{}
 
-	userinfo, err := u.GetUserinfo(username)
+	userinfo, err := u.GetUserinfoByUserName(username)
 	if err != nil {
 		fmt.Println("getUserinfo err:", err)
 		tool.RespInternalError(ctx)
 		return
 	}
 
-	//借鉴达达子
 	outPutMap := tool.ObjToMap(userinfo)
 	tool.RespSuccessfulWithData(ctx, outPutMap)
 
@@ -150,7 +264,7 @@ func viewUserMoney(ctx *gin.Context) {
 	username := iUsername.(string)
 	u := service.UserService{}
 
-	userinfo, err := u.GetUserinfo(username)
+	userinfo, err := u.GetUserinfoByUserName(username)
 	if err != nil {
 		fmt.Println("getUserinfo err:", err)
 		tool.RespInternalError(ctx)
@@ -168,6 +282,7 @@ func changePassword(ctx *gin.Context) {
 	iUsername, _ := ctx.Get("iUsername")
 	username := iUsername.(string)
 	u := service.UserService{}
+
 	//检验旧密码是否正确
 	flag, err := u.IsPasswordCorrect(username, oldPassword)
 	if err != nil {
@@ -183,7 +298,7 @@ func changePassword(ctx *gin.Context) {
 	//验证新密码合理性
 	flag = u.IsPasswordReasonable(newPassword)
 	if !flag {
-		tool.RespErrorWithData(ctx, "新密码不合理")
+		tool.RespErrorWithData(ctx, "新密码无效")
 		return
 	}
 
@@ -194,5 +309,65 @@ func changePassword(ctx *gin.Context) {
 		tool.RespInternalError(ctx)
 		return
 	}
-	tool.RespSuccessful(ctx)
+	tool.RespSuccessfulWithData(ctx, "修改成功！")
+}
+
+//注册商家
+func upgradePower(ctx *gin.Context) {
+	iUsername, _ := ctx.Get("iUsername")
+	token := ctx.PostForm("token")
+	username := iUsername.(string)
+	u := service.UserService{}
+
+	//验证是否以为商家身份
+	mc, _ := service.ParseToken(token)
+	if mc.User.GroupId == 1 {
+		tool.RespErrorWithData(ctx, "该用户已是商家")
+		return
+	}
+	err := u.UpdateGroupId(username, 1)
+	if err != nil {
+		fmt.Println("update group id err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+	tool.RespSuccessfulWithData(ctx, "注册成功！")
+}
+
+//加入店铺
+func addStoreUser(ctx *gin.Context) {
+	token := ctx.PostForm("token")
+	storeId := ctx.PostForm("store_id")
+
+	//验证商家
+	mc, _ := service.ParseToken(token)
+	if mc.User.GroupId != 1 {
+		tool.RespErrorWithData(ctx, "该用户不是商家")
+		return
+	}
+	if mc.User.StoreId != 0 {
+		tool.RespErrorWithData(ctx, "该用户已有店铺")
+		return
+	}
+
+	//验证storeId
+	if storeId == "" {
+		tool.RespErrorWithData(ctx, "store_id无效")
+		return
+	}
+	sid, err := strconv.Atoi(storeId)
+	if err != nil {
+		fmt.Println("store id to int err:", err)
+		tool.RespErrorWithData(ctx, "store_id无效")
+		return
+	}
+
+	us := service.UserService{}
+	err = us.AddStoreUser(mc.User.Username, sid)
+	if err != nil {
+		fmt.Println("add store user err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+	tool.RespSuccessfulWithData(ctx, "加入"+storeId+"号店铺成功！")
 }
