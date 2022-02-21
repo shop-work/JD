@@ -181,15 +181,17 @@
 {
 "status":true,
 "data": {
-"uid": int,
-"username": String, //用户名
-"name":String,//昵称
-"gender": String,
-"phone":String, //账号电话
-"money":float, //余额
-"addressId":int//默认地址id }
-
-}
+        "AddressId": 0,
+        "Gender": "0",
+        "GroupId": 0,
+        "Money": 10100,
+        "Name": "匿名用户",
+        "Password": "123456",
+        "Phone": "0",
+        "StoreId": 0,
+        "Uid": 5,
+        "Username": "qm"
+    },
 
 ```
 
@@ -603,6 +605,7 @@
 |status|data|说明|
 |:-----  |:-----|-----                           |
 |false |"token无效"   | |
+|false |"store_id无效"   | |
 |false |"该用户不是商家"   | |
 |false |"该用户已有店铺"   | |
 |true |"加入x号店铺成功！"   |参数合法  |

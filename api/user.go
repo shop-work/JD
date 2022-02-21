@@ -99,15 +99,15 @@ func login(ctx *gin.Context) {
 		tool.RespInternalError(ctx)
 		return
 	}
-	//创建token
-	tokenString, err := service.CreateToken(basicUserinfo, 12000, "TOKEN")
+	//创建token,有效期5分钟
+	tokenString, err := service.CreateToken(basicUserinfo, 300, "TOKEN")
 	if err != nil {
 		fmt.Println("create token err:", err)
 		tool.RespInternalError(ctx)
 		return
 	}
-	//创建refreshToken
-	refreshTokenString, err := service.CreateToken(basicUserinfo, 120000, "TOKEN")
+	//创建refreshToken，有效期5天
+	refreshTokenString, err := service.CreateToken(basicUserinfo, 5*24*60*60, "TOKEN")
 	if err != nil {
 		fmt.Println("create token err:", err)
 		tool.RespInternalError(ctx)
@@ -237,7 +237,7 @@ func changeInformation(ctx *gin.Context) {
 		}
 	}
 
-	tool.RespSuccessful(ctx)
+	tool.RespSuccessfulWithData(ctx, "修改成功")
 }
 
 //查看个人信息
@@ -309,7 +309,7 @@ func changePassword(ctx *gin.Context) {
 		tool.RespInternalError(ctx)
 		return
 	}
-	tool.RespSuccessfulWithData(ctx, "修改成功！")
+	tool.RespSuccessfulWithData(ctx, "修改成功,请重新登陆！")
 }
 
 //注册商家
@@ -331,7 +331,7 @@ func upgradePower(ctx *gin.Context) {
 		tool.RespInternalError(ctx)
 		return
 	}
-	tool.RespSuccessfulWithData(ctx, "注册成功！")
+	tool.RespSuccessfulWithData(ctx, "注册成功，请重新登陆！")
 }
 
 //加入店铺
@@ -358,6 +358,17 @@ func addStoreUser(ctx *gin.Context) {
 	sid, err := strconv.Atoi(storeId)
 	if err != nil {
 		fmt.Println("store id to int err:", err)
+		tool.RespErrorWithData(ctx, "store_id无效")
+		return
+	}
+	ss := service.StoreService{}
+	flag, err := ss.IsExistStoreId(sid)
+	if err != nil {
+		fmt.Println("judge store id err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+	if !flag {
 		tool.RespErrorWithData(ctx, "store_id无效")
 		return
 	}

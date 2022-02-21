@@ -27,9 +27,9 @@
 {
 		"status": true,
 		"data": "创建成功",
-		"store_id":
-		"store_name":
-		"notice":
+		"store_id":  1,
+		"store_name":饮品店,
+		"notice":物美价廉
 	}
 ```
 

@@ -157,7 +157,7 @@ func addCart(ctx *gin.Context) {
 		tool.RespInternalError(ctx)
 		return
 	}
-	if flag {
+	if !flag {
 		tool.RespErrorWithData(ctx, "goods_id无效")
 		return
 	}

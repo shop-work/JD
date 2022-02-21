@@ -66,7 +66,7 @@ func addFocus(ctx *gin.Context) {
 		storeId, err := strconv.Atoi(iGoodsId)
 		if err != nil {
 			fmt.Println("goodsId to int err:", err)
-			tool.RespErrorWithData(ctx, "sort_id无效")
+			tool.RespErrorWithData(ctx, "store_id无效")
 			return
 		}
 		if storeId <= 0 {
@@ -145,9 +145,19 @@ func deleteFocus(ctx *gin.Context) {
 			tool.RespErrorWithData(ctx, "goods_id无效")
 			return
 		}
-
+		gs := service.GoodsService{}
+		flag, err := gs.IsExistGoodsId(goodsId)
+		if err != nil {
+			fmt.Println("judge exist goods err:", err)
+			tool.RespInternalError(ctx)
+			return
+		}
+		if !flag {
+			tool.RespErrorWithData(ctx, "goods_id无效")
+			return
+		}
 		//是否已关注
-		flag, err := fs.IsExistGoodsFocus(mc.User.Uid, goodsId)
+		flag, err = fs.IsExistGoodsFocus(mc.User.Uid, goodsId)
 		if err != nil {
 			fmt.Println("judge exist focus err:", err)
 			tool.RespInternalError(ctx)
@@ -165,15 +175,26 @@ func deleteFocus(ctx *gin.Context) {
 		storeId, err := strconv.Atoi(iGoodsId)
 		if err != nil {
 			fmt.Println("goodsId to int err:", err)
-			tool.RespErrorWithData(ctx, "sort_id无效")
+			tool.RespErrorWithData(ctx, "store_id无效")
 			return
 		}
 		if storeId <= 0 {
 			tool.RespErrorWithData(ctx, "store_id无效")
 			return
 		}
+		ss := service.StoreService{}
+		flag, err := ss.IsExistStoreId(storeId)
+		if err != nil {
+			fmt.Println("judge exist store id err:", err)
+			tool.RespInternalError(ctx)
+			return
+		}
+		if !flag {
+			tool.RespErrorWithData(ctx, "store_id无效")
+			return
+		}
 		//是否已关注
-		flag, err := fs.IsExistStoreFocus(mc.User.Uid, storeId)
+		flag, err = fs.IsExistStoreFocus(mc.User.Uid, storeId)
 		if err != nil {
 			fmt.Println("judge exist focus err:", err)
 			tool.RespInternalError(ctx)

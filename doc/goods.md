@@ -30,32 +30,19 @@
     "status": true
     "data": [
         {
-            "goods_id": 1,
-            "sort_id": 0,
-            "goods_name": "可乐",
-            "picture": "123",
-            "price": 123,
-            "goods_intro": "0",
-            "number": 10,
-            "turnover": "10",
-            "comment_number": 10,
-            "feed_back": 0,
-            "type": "0",
-            "shelf_date": "2022-02-19T05:29:45Z"
-        },
-        {
             "goods_id": 2,
             "sort_id": 0,
+            "store_id": 2,
             "goods_name": "可乐",
-            "picture": "123",
-            "price": 155,
-            "goods_intro": "10",
-            "number": 11,
-            "turnover": "10",
-            "comment_number": 20,
-            "feed_back": 0.9,
+            "picture": "home/picture/part-00356-3963.jpg",
+            "price": 4,
+            "goods_intro": "0",
+            "number": 10,
+            "turnover": "0",
+            "comment_number": 0,
+            "feed_back": 0,
             "type": "0",
-            "shelf_date": "2022-02-19T05:34:45Z"
+            "shelf_date": "2022-02-21T06:46:04Z"
         }
     ],
 }
@@ -619,7 +606,7 @@
 ##### 简要描述
 
 - multipart/form-data
-- 提交订单接口
+- 提交订单接口,用户提交成功时，用户消费扣钱，店铺收益
 
 ##### 请求URL
 
