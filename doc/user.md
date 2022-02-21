@@ -90,8 +90,12 @@
 
 ##### 返回参数说明
 
-|参数名|类型|说明| |:----- |:-----|----- | | |groupId |int |用户组id，1：店家；0：普通用户 | |token | string |用户token | |refreshToken |
-string |用户refreshToken | |uid | int |用户uid |
+|参数名|类型|说明| 
+|:----- |:-----|----- | 
+|groupId |int|用户组id，1：店家；0：普通用户 | 
+|token | string |用户token |
+|refreshToken |string |用户refreshToken |
+|uid | int |用户uid |
 
 |status|data|说明|
 |:-----  |:-----|-----                           |
