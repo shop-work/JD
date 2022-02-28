@@ -15,18 +15,18 @@ type UserDao struct {
 }
 
 func (dao *UserDao) InsertUser(user model.User) error {
-	_, err := DB.Exec("insert into shop.userinfo(username, password,name)values(?,?,?)", user.Username, user.Password, user.Name)
+	_, err := DB.Exec("insert into shop.userinfo(username, password,name,salt)values(?,?,?,?)", user.Username, user.Password, user.Name, user.Salt)
 	return err
 }
 
 // SelectUserByUsername 查看用户详细信息
 func (dao *UserDao) SelectUserByUsername(username string) (model.User, error) {
 	user := model.User{}
-	row := DB.QueryRow("select uid,password,gender,name,phone,money,address_id,group_id,store_id from shop.userinfo where username=?", username)
+	row := DB.QueryRow("select uid,password,gender,name,phone,money,address_id,group_id,store_id,salt from shop.userinfo where username=?", username)
 	if row.Err() != nil {
 		return user, row.Err()
 	}
-	err := row.Scan(&user.Uid, &user.Password, &user.Gender, &user.Name, &user.Phone, &user.Money, &user.AddressId, &user.GroupId, &user.StoreId)
+	err := row.Scan(&user.Uid, &user.Password, &user.Gender, &user.Name, &user.Phone, &user.Money, &user.AddressId, &user.GroupId, &user.StoreId, &user.Salt)
 	if err != nil {
 		return user, err
 	}

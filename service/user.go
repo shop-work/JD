@@ -8,7 +8,9 @@
 package service
 
 import (
+	"crypto/md5"
 	"database/sql"
+	"encoding/hex"
 	"shop/dao"
 	"shop/model"
 )
@@ -32,6 +34,13 @@ func (u *UserService) IsPasswordCorrect(username, password string) (bool, error)
 		}
 		return false, err
 	}
+
+	//验证密码
+	m5 := md5.New()
+	m5.Write([]byte(password))
+	m5.Write([]byte(user.Salt))
+	st := m5.Sum(nil)
+	password = hex.EncodeToString(st)
 	if user.Password != password {
 		return false, err
 	}

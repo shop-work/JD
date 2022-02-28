@@ -11,6 +11,7 @@ type User struct {
 	Uid       int     `json:"uid"`
 	Username  string  `json:"username"`
 	Password  string  `json:"password"`
+	Salt      string  `json:"salt"`
 	Gender    string  `json:"gender"`
 	Name      string  `json:"name"`       //昵称
 	Phone     string  `json:"phone"`      //账号电话

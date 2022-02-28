@@ -8,12 +8,15 @@
 package api
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"shop/model"
 	"shop/service"
 	"shop/tool"
 	"strconv"
+	"time"
 )
 
 //注册
@@ -56,9 +59,18 @@ func register(ctx *gin.Context) {
 	user := model.User{
 		Username: username,
 		Password: password,
+		Salt:     strconv.FormatInt(time.Now().Unix(), 10),
 		Name:     name,
 	}
 
+	//md5加密
+	m5 := md5.New()
+	m5.Write([]byte(user.Password))
+	m5.Write([]byte(user.Salt))
+	st := m5.Sum(nil)
+	user.Password = hex.EncodeToString(st)
+
+	//注册
 	err = u.Register(user)
 	if err != nil {
 		fmt.Println("register err: ", err)
