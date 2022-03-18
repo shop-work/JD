@@ -14,8 +14,10 @@ func InitEngine() {
 	engine.Use(Cors())
 	apiGroup := engine.Group("/api")
 	{
-		apiGroup.POST("/user", register) //注册
-		apiGroup.GET("/user", login)     //登陆
+		apiGroup.POST("/user", register)               //注册
+		apiGroup.GET("/user", login)                   //登陆
+		apiGroup.GET("/oauth", getCode)                //github登陆获取code
+		apiGroup.GET("/oauth/redirect", loginByGithub) //github登陆
 
 		userGroup := apiGroup.Group("/user", jwtAuth)
 		{

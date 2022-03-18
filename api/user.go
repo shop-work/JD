@@ -10,14 +10,147 @@ package api
 import (
 	"crypto/md5"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"html/template"
 	"shop/model"
 	"shop/service"
 	"shop/tool"
 	"strconv"
 	"time"
 )
+
+var conf = model.Conf{
+	ClientId:     "ee9d6a9dad9fced742c1",
+	ClientSecret: "abaedca8d689f743fdfd61bd47606abbeecd2c49",
+	RedirectUrl:  "http://101.43.160.254:8080/api/oauth/redirect",
+}
+
+//获取github返回的code
+func getCode(ctx *gin.Context) {
+
+	// 解析指定文件生成模板对象
+	var temp *template.Template
+	var err error
+	if temp, err = template.ParseFiles("login.html"); err != nil {
+		fmt.Println("读取文件失败，错误信息为:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+
+	// 利用给定数据渲染模板(html页面)，并将结果写入w，返回给前端
+	if err = temp.Execute(ctx.Writer, conf); err != nil {
+		fmt.Println("读取渲染html页面失败，错误信息为:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+
+}
+
+func loginByGithub(ctx *gin.Context) {
+	code := ctx.Query("code") //github传来的code
+
+	tokenAuthUrl := fmt.Sprintf(
+		"https://github.com/login/oauth/access_token?client_id=%s&client_secret=%s&code=%s",
+		conf.ClientId, conf.ClientSecret, code)
+
+	fmt.Println(tokenAuthUrl)
+
+	//获取token
+	var token *model.Token
+	var err error
+	if token, err = service.GetToken(tokenAuthUrl); err != nil {
+		fmt.Println("get token err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+
+	fmt.Printf("%+v", token)
+
+	// 通过token，获取用户信息
+	var userInfo map[string]interface{}
+	if userInfo, err = service.GetUserInfo(token); err != nil {
+		fmt.Println("获取用户信息失败，错误信息为:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+
+	var userInfoBytes []byte
+	if userInfoBytes, err = json.Marshal(userInfo); err != nil {
+		fmt.Println("在将用户信息(map)转为用户信息([]byte)时发生错误，错误信息为:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+
+	var githubUserinfo model.GitHubUserinfo
+	json.Unmarshal(userInfoBytes, &githubUserinfo)
+
+	/*fmt.Println()
+	fmt.Println(userInfo)
+
+	ctx.JSON(200,gin.H{
+		"userInfo": userInfo,
+	})
+
+	fmt.Println(githubUserinfo.Name)*/
+
+	//是否新用户
+	u := service.UserService{}
+	flag, err := u.IsExistGithubLogin(githubUserinfo.Login)
+	if err != nil {
+		fmt.Println("judge exist user err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+
+	//注册新用户
+	if !flag {
+		user := model.User{
+			Username:    githubUserinfo.Login,
+			Name:        githubUserinfo.Name,
+			GithubLogin: githubUserinfo.Login,
+		}
+		err = u.Register(user)
+		if err != nil {
+			fmt.Println("register err:", err)
+			tool.RespInternalError(ctx)
+			return
+		}
+	}
+
+	//用户登陆
+	//获取用户固定信息
+	basicUserinfo, err := u.GetBasicUserinfo(githubUserinfo.Login)
+	if err != nil {
+		fmt.Println("getBasicUserInfo err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+	//创建token,有效期5分钟
+	tokenString, err := service.CreateToken(basicUserinfo, 300, "TOKEN")
+	if err != nil {
+		fmt.Println("create token err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+	//创建refreshToken，有效期5天
+	refreshTokenString, err := service.CreateToken(basicUserinfo, 5*24*60*60, "TOKEN")
+	if err != nil {
+		fmt.Println("create token err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+
+	ctx.JSON(200, gin.H{
+		"status":       true,
+		"data":         "登陆成功",
+		"uid":          basicUserinfo.Uid,
+		"groupId":      basicUserinfo.GroupId,
+		"token":        tokenString,
+		"refreshToken": refreshTokenString,
+	})
+}
 
 //注册
 func register(ctx *gin.Context) {

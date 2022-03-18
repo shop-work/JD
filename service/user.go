@@ -128,3 +128,16 @@ func (u *UserService) UpdateMoney(username string, money float32) error {
 	return d.UpdateMoney(username, money)
 
 }
+
+//是否已存在该github账号的用户
+func (u *UserService) IsExistGithubLogin(login string) (bool, error) {
+	d := dao.UserDao{}
+	_, err := d.SelectUserByGithubLogin(login)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return false, nil
+		}
+		return false, err
+	}
+	return true, nil
+}
