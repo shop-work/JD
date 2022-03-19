@@ -52,7 +52,7 @@ func GetToken(url string) (*model.Token, error) {
 	// 形成请求
 	var req *http.Request
 	var err error
-	if req, err = http.NewRequest(http.MethodGet, url, nil); err != nil {
+	if req, err = http.NewRequest(http.MethodPost, url, nil); err != nil {
 		return nil, err
 	}
 	req.Header.Set("accept", "application/json")

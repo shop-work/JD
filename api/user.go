@@ -14,6 +14,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"html/template"
+	"net/http"
 	"shop/model"
 	"shop/service"
 	"shop/tool"
@@ -27,7 +28,7 @@ var conf = model.Conf{
 	RedirectUrl:  "http://localhost:8080/api/oauth/redirect",
 }
 
-//获取github返回的code
+//通过前端页面获取github返回的code
 func getCode(ctx *gin.Context) {
 
 	// 解析指定文件生成模板对象
@@ -48,6 +49,7 @@ func getCode(ctx *gin.Context) {
 
 }
 
+//redirect
 func loginByGithub(ctx *gin.Context) {
 	code := ctx.Query("code") //github传来的code
 
@@ -60,13 +62,28 @@ func loginByGithub(ctx *gin.Context) {
 	//获取token
 	var token *model.Token
 	var err error
-	if token, err = service.GetToken(tokenAuthUrl); err != nil {
-		fmt.Println("get token err:", err)
+	if ctx.Request, err = http.NewRequest(http.MethodPost, tokenAuthUrl, nil); err != nil {
+		fmt.Println("request err：", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+	ctx.Request.Header.Set("accept", "application/json")
+
+	// 发送请求并获得响应
+	var httpClient = http.Client{}
+	var res *http.Response
+	if res, err = httpClient.Do(ctx.Request); err != nil {
+		fmt.Println("response err：", err)
 		tool.RespInternalError(ctx)
 		return
 	}
 
-	fmt.Printf("%+v", token)
+	// 将响应体解析为 token，并返回
+	if err = json.NewDecoder(res.Body).Decode(&token); err != nil {
+		fmt.Println("get token err：", err)
+		tool.RespInternalError(ctx)
+		return
+	}
 
 	// 通过token，获取用户信息
 	var userInfo map[string]interface{}
@@ -90,15 +107,6 @@ func loginByGithub(ctx *gin.Context) {
 		tool.RespInternalError(ctx)
 		return
 	}
-
-	/*fmt.Println()
-	fmt.Println(userInfo)
-
-	ctx.JSON(200,gin.H{
-		"userInfo": userInfo,
-	})
-
-	fmt.Println(githubUserinfo.Name)*/
 
 	//是否新用户
 	u := service.UserService{}
