@@ -24,7 +24,7 @@ import (
 var conf = model.Conf{
 	ClientId:     "ee9d6a9dad9fced742c1",
 	ClientSecret: "abaedca8d689f743fdfd61bd47606abbeecd2c49",
-	RedirectUrl:  "http://101.43.160.254:8080/api/oauth/redirect",
+	RedirectUrl:  "http://localhost:8080/api/oauth/redirect",
 }
 
 //获取github返回的code
@@ -84,7 +84,12 @@ func loginByGithub(ctx *gin.Context) {
 	}
 
 	var githubUserinfo model.GitHubUserinfo
-	json.Unmarshal(userInfoBytes, &githubUserinfo)
+	err = json.Unmarshal(userInfoBytes, &githubUserinfo)
+	if err != nil {
+		fmt.Println("unmarshal json err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
 
 	/*fmt.Println()
 	fmt.Println(userInfo)
@@ -141,6 +146,7 @@ func loginByGithub(ctx *gin.Context) {
 		tool.RespInternalError(ctx)
 		return
 	}
+	fmt.Println(githubUserinfo)
 
 	ctx.JSON(200, gin.H{
 		"status":       true,
