@@ -11,8 +11,11 @@ import (
 	"crypto/md5"
 	"database/sql"
 	"encoding/hex"
+	"fmt"
+	"math/rand"
 	"shop/dao"
 	"shop/model"
+	"time"
 )
 
 type UserService struct {
@@ -140,4 +143,32 @@ func (u *UserService) IsExistGithubLogin(login string) (bool, error) {
 		return false, err
 	}
 	return true, nil
+}
+
+//通过电话查找用户
+func (u *UserService) LoginBySms(phone string) (model.User, error) {
+	d := dao.UserDao{}
+	return d.SelectUserByPhone(phone)
+}
+
+func (u *UserService) JudgePhone(phone string) (bool, error) {
+	d := dao.UserDao{}
+	_, err := d.SelectUserByPhone(phone)
+	if err != nil {
+		if err.Error() == "sql: no rows in result set" {
+			return false, nil
+		}
+		return false, err
+	}
+
+	return true, nil
+}
+
+func (u *UserService) SendCodeByPhone(phone string) (string, error) {
+	code := fmt.Sprintf("%06v", rand.New(rand.NewSource(time.Now().UnixNano())).Int31n(1000000))
+	err := SendMessage(phone, code)
+	if err != nil {
+		return "", err
+	}
+	return code, err
 }

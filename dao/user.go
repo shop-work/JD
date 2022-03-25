@@ -107,3 +107,18 @@ func (dao *UserDao) SelectUserByGithubLogin(login string) (model.User, error) {
 	user.GithubLogin = login
 	return user, err
 }
+
+//通过电话查找用户
+func (dao *UserDao) SelectUserByPhone(phone string) (model.User, error) {
+	user := model.User{}
+	row := DB.QueryRow("select uid,username,gender,name,money,address_id,group_id,store_id,salt from shop.userinfo where phone=?", phone)
+	if row.Err() != nil {
+		return user, row.Err()
+	}
+	err := row.Scan(&user.Uid, &user.Username, &user.Gender, &user.Name, &user.Money, &user.AddressId, &user.GroupId, &user.StoreId, &user.Salt)
+	if err != nil {
+		return user, err
+	}
+	user.Phone = phone
+	return user, err
+}

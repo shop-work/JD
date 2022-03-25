@@ -166,6 +166,130 @@ func loginByGithub(ctx *gin.Context) {
 	})
 }
 
+//发送短信验证码
+func sendSmsByPhone(ctx *gin.Context) {
+	phone := ctx.PostForm("phone")
+
+	if phone == "" {
+		tool.RespErrorWithData(ctx, "手机号不可为空")
+		return
+	}
+
+	us := service.UserService{}
+
+	verifyCode, err := us.SendCodeByPhone(phone)
+	if err != nil {
+		fmt.Println("SendCodeByPhoneErr:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+
+	if verifyCode == "isv.MOBILE_NUMBER_ILLEGAL" {
+		tool.RespErrorWithData(ctx, "手机号不合法")
+		return
+	}
+
+	//把验证码放到redis中
+	rd := service.RedisService{}
+	err = rd.RedisSetValue(phone, verifyCode)
+	if err != nil {
+		fmt.Println("SetRedisErr: ", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+
+	tool.RespSuccessful(ctx)
+}
+
+//使用短信验证码登陆
+func loginBySms(ctx *gin.Context) {
+	phone := ctx.PostForm("phone")
+	verifyCode := ctx.PostForm("verify_code")
+
+	if phone == "" {
+		tool.RespErrorWithData(ctx, "手机号不能为空哦")
+		return
+	}
+
+	if verifyCode == "" {
+		tool.RespErrorWithData(ctx, "短信验证码不能为空")
+		return
+	}
+
+	//验证码验证
+	rd := service.RedisService{}
+	value, err := rd.RedisGetValue(phone)
+	if err != nil {
+		if err.Error() == "redis: nil" {
+			tool.RespErrorWithData(ctx, "未发送验证码")
+			return
+		}
+		fmt.Println("redis get value err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+	if value != verifyCode {
+		tool.RespErrorWithData(ctx, "验证码错误")
+		return
+	}
+
+	us := service.UserService{}
+	userinfo := model.User{}
+
+	//注册
+	flag, err := us.JudgePhone(phone)
+	if !flag {
+		userinfo.Username = "nm" + phone
+		userinfo.Phone = phone
+		err = us.Register(userinfo)
+		if err != nil {
+			fmt.Println("register user err:", err)
+			tool.RespInternalError(ctx)
+			return
+		}
+	}
+
+	//登陆
+	userinfo, err = us.LoginBySms(phone)
+	if err != nil {
+		fmt.Println("login by sms err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+
+	u := service.UserService{}
+	//获取用户固定信息
+	basicUserinfo, err := u.GetBasicUserinfo(userinfo.Username)
+	if err != nil {
+		fmt.Println("getBasicUserInfo err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+	//创建token,有效期5分钟
+	tokenString, err := service.CreateToken(basicUserinfo, 300, "TOKEN")
+	if err != nil {
+		fmt.Println("create token err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+	//创建refreshToken，有效期5天
+	refreshTokenString, err := service.CreateToken(basicUserinfo, 5*24*60*60, "TOKEN")
+	if err != nil {
+		fmt.Println("create token err:", err)
+		tool.RespInternalError(ctx)
+		return
+	}
+
+	ctx.JSON(200, gin.H{
+		"status":       true,
+		"data":         "登陆成功",
+		"uid":          basicUserinfo.Uid,
+		"groupId":      basicUserinfo.GroupId,
+		"token":        tokenString,
+		"refreshToken": refreshTokenString,
+	})
+}
+
 //注册
 func register(ctx *gin.Context) {
 	username := ctx.PostForm("username")

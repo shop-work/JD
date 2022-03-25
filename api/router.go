@@ -16,6 +16,8 @@ func InitEngine() {
 	{
 		apiGroup.POST("/user", register)               //注册
 		apiGroup.GET("/user", login)                   //登陆
+		apiGroup.GET("/user/sms", sendSmsByPhone)      //发送验证码
+		apiGroup.POST("/user/sms", loginBySms)         //验证码登录
 		apiGroup.GET("/oauth", getCode)                //github登陆获取code
 		apiGroup.GET("/oauth/redirect", loginByGithub) //github登陆
 

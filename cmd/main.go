@@ -14,5 +14,6 @@ import (
 
 func main() {
 	dao.InitDB()
+	dao.InitRedisClient()
 	api.InitEngine()
 }

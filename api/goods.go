@@ -10,6 +10,7 @@ package api
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"shop/dao"
 	"shop/model"
 	"shop/service"
 	"shop/tool"
@@ -19,6 +20,7 @@ import (
 
 //商品主页
 func viewGoods(ctx *gin.Context) {
+	token := ctx.PostForm("token")
 	goodsName := ctx.PostForm("goods_name")            //商品关键字
 	iSortId := ctx.PostForm("sort_id")                 //商品类别
 	isPriceDesc := ctx.PostForm("is_price_desc")       //按商品价格排序，true降序，false升序,其他乱序
@@ -26,6 +28,7 @@ func viewGoods(ctx *gin.Context) {
 	isFeedbackDesc := ctx.PostForm("is_feedback_desc") //按商品好评率排序，true降序，false升序，其他则乱序
 	gs := service.GoodsService{}
 	ss := service.SortService{}
+	fs := service.FocusService{}
 	var goodses []model.Goods
 	var err error
 
@@ -37,6 +40,48 @@ func viewGoods(ctx *gin.Context) {
 			tool.RespInternalError(ctx)
 			return
 		}
+	}
+
+	//关注的店铺的推送
+	if token != "" {
+		//解析token
+		mc, err := service.ParseToken(token)
+		if err != nil {
+			fmt.Println("token err:", err.Error())
+			tool.RespSuccessfulWithData(ctx, "token无效")
+			ctx.Abort()
+			return
+		}
+
+		focusStores, err := fs.SelectFocusByUid(mc.User.Uid)
+		if err != nil {
+			fmt.Println("select focus by uid err:", err)
+			tool.RespInternalError(ctx)
+			return
+		}
+
+		//查询推送
+		for _, focus := range focusStores {
+			id := fmt.Sprintf("%d", focus.GoodsId)
+			pubsub := dao.RedisDB.Subscribe(id)
+			defer pubsub.Close()
+			for msg := range pubsub.Channel() {
+				gid, err := strconv.Atoi(msg.Payload)
+				if err != nil {
+					fmt.Println("payload to int err:", err)
+					tool.RespInternalError(ctx)
+					return
+				}
+				goods, err := gs.SelectGoodsByGoodsId(gid)
+				if err != nil {
+					fmt.Println("select goods by goods id err:", err)
+					tool.RespInternalError(ctx)
+					return
+				}
+				goodses = append(goodses, goods)
+			}
+		}
+
 	}
 
 	//sortId
@@ -320,5 +365,13 @@ func addGoods(ctx *gin.Context) {
 		tool.RespInternalError(ctx)
 		return
 	}
-	tool.RespSuccessfulWithData(ctx, "添加成功")
+	//推送给关注用户
+	num, err := dao.RedisDB.Publish(fmt.Sprintf("%d", goods.StoreId), fmt.Sprintf("%d", goods.GoodsId)).Result()
+	if err != nil {
+		fmt.Println("publish err:", err.Error())
+		tool.RespInternalError(ctx)
+		return
+	}
+	text := fmt.Sprintf("%d clients received the message\n", num)
+	tool.RespSuccessfulWithData(ctx, "添加成功!"+text)
 }
