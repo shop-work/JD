@@ -193,6 +193,9 @@ func sendSmsByPhone(ctx *gin.Context) {
 		return
 	}
 
+	text, _ := rd.RedisGetValue(phone)
+	fmt.Println("\n验证码：", text)
+
 	tool.RespSuccessful(ctx)
 }
 
