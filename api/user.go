@@ -16,17 +16,12 @@ import (
 	"html/template"
 	"net/http"
 	"shop/model"
+	"shop/secret"
 	"shop/service"
 	"shop/tool"
 	"strconv"
 	"time"
 )
-
-var conf = model.Conf{
-	ClientId:     "ee9d6a9dad9fced742c1",
-	ClientSecret: "abaedca8d689f743fdfd61bd47606abbeecd2c49",
-	RedirectUrl:  "http://localhost:8080/api/oauth/redirect",
-}
 
 //通过前端页面获取github返回的code
 func getCode(ctx *gin.Context) {
@@ -41,7 +36,7 @@ func getCode(ctx *gin.Context) {
 	}
 
 	// 利用给定数据渲染模板(html页面)，并将结果写入w，返回给前端
-	if err = temp.Execute(ctx.Writer, conf); err != nil {
+	if err = temp.Execute(ctx.Writer, secret.MyConf); err != nil {
 		fmt.Println("读取渲染html页面失败，错误信息为:", err)
 		tool.RespInternalError(ctx)
 		return
@@ -55,7 +50,7 @@ func loginByGithub(ctx *gin.Context) {
 
 	tokenAuthUrl := fmt.Sprintf(
 		"https://github.com/login/oauth/access_token?client_id=%s&client_secret=%s&code=%s",
-		conf.ClientId, conf.ClientSecret, code)
+		secret.MyConf.ClientId, secret.MyConf.ClientSecret, code)
 
 	fmt.Println(tokenAuthUrl)
 

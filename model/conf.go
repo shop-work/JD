@@ -11,4 +11,6 @@ type Conf struct {
 	ClientId     string
 	ClientSecret string
 	RedirectUrl  string
+	SecretId     string
+	SecretKey    string
 }

@@ -13,13 +13,14 @@ import (
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/profile"
 	sms "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/sms/v20210111"
+	"shop/secret"
 )
 
 //发送短信
 func SendMessage(phone, values string) error {
 	credential := common.NewCredential(
-		"AKIDEI6ewzlGVUCdnhKglZ6ORDiwtZz80f4D",
-		"sTnre9ON5WgaDZeS1JJ2VhcFciX5MM5Y",
+		secret.MyConf.SecretId,
+		secret.MyConf.SecretKey,
 	)
 	cpf := profile.NewClientProfile()
 	cpf.HttpProfile.Endpoint = "sms.tencentcloudapi.com"
