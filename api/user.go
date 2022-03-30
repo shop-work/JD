@@ -241,7 +241,7 @@ func loginBySms(ctx *gin.Context) {
 	if !flag {
 		userinfo.Username = "nm" + phone
 		userinfo.Phone = phone
-		err = us.Register(userinfo)
+		err = us.RegisterBySms(userinfo)
 		if err != nil {
 			fmt.Println("register user err:", err)
 			tool.RespInternalError(ctx)

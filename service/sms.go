@@ -29,6 +29,7 @@ func SendMessage(phone, values string) error {
 
 	request.PhoneNumberSet = common.StringPtrs([]string{phone})
 	request.SmsSdkAppId = common.StringPtr("1400642372")
+	request.SignName = common.StringPtr("邹云个人测试使用")
 	request.TemplateId = common.StringPtr("1327589")
 	request.TemplateParamSet = common.StringPtrs([]string{values, "2"})
 

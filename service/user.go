@@ -172,3 +172,9 @@ func (u *UserService) SendCodeByPhone(phone string) (string, error) {
 	}
 	return code, err
 }
+
+//验证码注册
+func (u *UserService) RegisterBySms(userinfo model.User) error {
+	d := dao.UserDao{}
+	return d.RegisterBySms(userinfo)
+}

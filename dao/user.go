@@ -122,3 +122,9 @@ func (dao *UserDao) SelectUserByPhone(phone string) (model.User, error) {
 	user.Phone = phone
 	return user, err
 }
+
+//验证码注册
+func (dao *UserDao) RegisterBySms(user model.User) error {
+	_, err := DB.Exec("insert into shop.userinfo(username, phone)values(?,?)", user.Username, user.Phone)
+	return err
+}
