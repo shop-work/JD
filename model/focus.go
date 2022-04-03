@@ -12,3 +12,7 @@ type Focus struct {
 	GoodsId int `json:"goods_id"`
 	StoreId int `json:"store_id"`
 }
+
+func (Focus) TableName() string {
+	return "focus"
+}

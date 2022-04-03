@@ -8,6 +8,7 @@
 package dao
 
 import (
+	"gorm.io/gorm"
 	"shop/model"
 	"time"
 )
@@ -55,4 +56,43 @@ func (d *OrderDao) SelectOrdersByUid(uid int) ([]model.OrderDetails, error) {
 		orders = append(orders, order)
 	}
 	return orders, err
+}
+
+//gorm事务处理提交订单
+func (d *OrderDao) SubmitOrder(user model.User, order model.OrderDetails) error {
+	err := GormDB.Transaction(func(tx *gorm.DB) error {
+		//更新用户余额
+		if err := tx.Model(&user).Update("money", gorm.Expr("money-?", order.Money)).Error; err != nil {
+			return err
+		}
+
+		//验证购物车
+		//采用预加载
+		if err := tx.Preload("ShoppingCart").Find(&order).Error; err != nil {
+			return err
+		}
+		for _, cart := range order.ShoppingCarts {
+			var goods model.Goods
+			if err := tx.First(&goods, cart.GoodsId).Error; err != nil {
+				return err
+			}
+
+			//更新货物余量
+			if err := tx.Model(&goods).Update("number", gorm.Expr("number-?", cart.Number)).Error; err != nil {
+				return err
+			}
+
+			//更新店铺余额
+			if err := tx.Model(&model.Store{}).Where("store_id=?", goods.StoreId).Update("store_money",
+				gorm.Expr("store_money+?", goods.Price*float32(cart.Number))).Error; err != nil {
+				return err
+			}
+		}
+
+		return nil
+	})
+	if err != nil {
+		return err
+	}
+	return nil
 }

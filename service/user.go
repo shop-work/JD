@@ -12,6 +12,7 @@ import (
 	"database/sql"
 	"encoding/hex"
 	"fmt"
+	"gorm.io/gorm"
 	"math/rand"
 	"shop/dao"
 	"shop/model"
@@ -32,7 +33,7 @@ func (u *UserService) IsPasswordCorrect(username, password string) (bool, error)
 	d := dao.UserDao{}
 	user, err := d.SelectUserByUsername(username)
 	if err != nil {
-		if err == sql.ErrNoRows {
+		if err == gorm.ErrRecordNotFound {
 			return false, nil
 		}
 		return false, err
@@ -55,7 +56,7 @@ func (u *UserService) IsExistUsername(username string) (bool, error) {
 	d := dao.UserDao{}
 	_, err := d.SelectUserByUsername(username)
 	if err != nil {
-		if err == sql.ErrNoRows {
+		if err == gorm.ErrRecordNotFound {
 			return false, nil
 		}
 		return false, err

@@ -17,3 +17,7 @@ type Comment struct {
 	Star      int       `json:"star"` //评星
 	Date      time.Time `json:"date"`
 }
+
+func (Comment) TableName() string {
+	return "comment"
+}

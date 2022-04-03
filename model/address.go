@@ -14,3 +14,7 @@ type AddressInfo struct {
 	Phone     string `json:"phone"`   //收货电话
 	Address   string `json:"address"` //收货地址
 }
+
+func (AddressInfo) TableName() string {
+	return "address_info"
+}

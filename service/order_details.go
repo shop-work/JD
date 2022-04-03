@@ -44,3 +44,9 @@ func (s *OrderService) SelectOrdersByUid(uid int) ([]model.OrderDetails, error) 
 	return d.SelectOrdersByUid(uid)
 
 }
+
+//提交订单
+func (s *OrderService) SubmitOrder(u model.User, order model.OrderDetails) error {
+	d := dao.OrderDao{}
+	return d.SubmitOrder(u, order)
+}

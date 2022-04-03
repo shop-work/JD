@@ -12,7 +12,7 @@ type User struct {
 	Username    string  `json:"username"`
 	Password    string  `json:"password"`
 	Salt        string  `json:"salt"`
-	Gender      string  `json:"gender"`
+	Gender      bool    `json:"gender"`
 	Name        string  `json:"name"`         //昵称
 	Phone       string  `json:"phone"`        //账号电话
 	Money       float32 `json:"money"`        //余额
@@ -20,4 +20,8 @@ type User struct {
 	GroupId     int     `json:"group_id"`     //成员组id,1为超级管理员，0为普通用户
 	StoreId     int     `json:"store_id"`     //商家的店铺id
 	GithubLogin string  `json:"github_login"` //github登陆账号
+}
+
+func (User) TableName() string {
+	return "userinfo"
 }

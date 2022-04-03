@@ -16,8 +16,6 @@ func InitEngine() {
 	{
 		apiGroup.POST("/user", register)               //注册
 		apiGroup.GET("/user", login)                   //登陆
-		apiGroup.GET("/user/sms", sendSmsByPhone)      //发送验证码
-		apiGroup.POST("/user/sms", loginBySms)         //验证码登录
 		apiGroup.GET("/oauth", getCode)                //github登陆获取code
 		apiGroup.GET("/oauth/redirect", loginByGithub) //github登陆
 
@@ -32,6 +30,8 @@ func InitEngine() {
 			userGroup.POST("/focus", deleteFocus)      //取消关注
 			userGroup.POST("/power", upgradePower)     //注册商家
 			userGroup.PUT("/store", addStoreUser)      //商家入铺
+			apiGroup.GET("/sms", sendSmsByPhone)       //发送验证码
+			apiGroup.POST("/sms", loginBySms)          //验证码登录
 
 			//密码组
 			passwordGroup := userGroup.Group("/password")

@@ -14,13 +14,18 @@ import (
 type UserDao struct {
 }
 
-func (dao *UserDao) InsertUser(user model.User) error {
+/*func (dao *UserDao) InsertUser(user model.User) error {
 	_, err := DB.Exec("insert into shop.userinfo(username, password,name,salt)values(?,?,?,?)", user.Username, user.Password, user.Name, user.Salt)
 	return err
+}*/
+
+func (dao *UserDao) InsertUser(user model.User) error {
+	result := GormDB.Select("username", "password", "gender", "name", "salt").Create(&user)
+	return result.Error
 }
 
 // SelectUserByUsername 查看用户详细信息
-func (dao *UserDao) SelectUserByUsername(username string) (model.User, error) {
+/*func (dao *UserDao) SelectUserByUsername(username string) (model.User, error) {
 	user := model.User{}
 	row := DB.QueryRow("select uid,password,gender,name,phone,money,address_id,group_id,store_id,salt from shop.userinfo where username=?", username)
 	if row.Err() != nil {
@@ -32,10 +37,16 @@ func (dao *UserDao) SelectUserByUsername(username string) (model.User, error) {
 	}
 	user.Username = username
 	return user, err
+}*/
+
+func (dao *UserDao) SelectUserByUsername(username string) (model.User, error) {
+	user := model.User{}
+	result := GormDB.Where("username=?", username).First(&user)
+	return user, result.Error
 }
 
 // SelectBasicUserByUsername 查看用户固定信息
-func (dao *UserDao) SelectBasicUserByUsername(username string) (model.User, error) {
+/*func (dao *UserDao) SelectBasicUserByUsername(username string) (model.User, error) {
 	user := model.User{}
 	row := DB.QueryRow("select uid,password,group_id,store_id from shop.userinfo where username=?", username)
 	if row.Err() != nil {
@@ -47,17 +58,29 @@ func (dao *UserDao) SelectBasicUserByUsername(username string) (model.User, erro
 	}
 	user.Username = username
 	return user, err
+}*/
+func (dao *UserDao) SelectBasicUserByUsername(username string) (model.User, error) {
+	user := model.User{}
+	result := GormDB.Select("uid", "password", "group_id", "store_id").Where("username=?", username).First(&user)
+	return user, result.Error
 }
 
-func (dao *UserDao) UpdatePassword(username, newPassword string) error {
+/*func (dao *UserDao) UpdatePassword(username, newPassword string) error {
 	_, err := DB.Exec("update shop.userinfo set password=? where username=?", newPassword, username)
 	return err
+}*/
+
+func (dao *UserDao) UpdatePassword(username, newPassword string) error {
+	result := GormDB.Model(&model.User{}).Where("username=?", username).Update("password", newPassword)
+	return result.Error
 }
 
 // UpdatePhone 更新用户电话
 func (dao *UserDao) UpdatePhone(username string, phone string) error {
-	_, err := DB.Exec("update shop.userinfo set phone=? where username=?", phone, username)
-	return err
+	/*_, err := DB.Exec("update shop.userinfo set phone=? where username=?", phone, username)
+	return err*/
+	result := GormDB.Model(&model.User{}).Where("username=?", username).Update("phone", phone)
+	return result.Error
 }
 
 // UpdateName 更新昵称

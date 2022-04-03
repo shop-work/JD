@@ -11,3 +11,7 @@ type Sort struct {
 	SortId   int    `json:"sort_id"`
 	SortName string `json:"sort_name"`
 }
+
+func (Sort) TableName() string {
+	return "sort"
+}

@@ -227,6 +227,14 @@ func submitOrder(ctx *gin.Context) {
 		return
 	}
 
+	//通过事务处理订单
+	err = os.SubmitOrder(user, order)
+	if err != nil {
+		fmt.Println("submit order err:", err)
+		tool.RespErrorWithData(ctx, "订单提交未成功")
+		return
+	}
+
 	//支付
 	err = us.UpdateMoney(user.Username, user.Money-order.Money)
 	if err != nil {

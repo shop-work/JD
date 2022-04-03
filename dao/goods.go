@@ -23,7 +23,7 @@ func (d *GoodsDao) AddGoods(goods model.Goods) error {
 // ViewGoods 查看所有商品
 func (d *GoodsDao) ViewGoods() ([]model.Goods, error) {
 	var goodses []model.Goods
-	rows, err := DB.Query("select * from shop.goods_info")
+	/*rows, err := DB.Query("select * from shop.goods_info")
 	if err != nil {
 		return nil, err
 	}
@@ -36,8 +36,10 @@ func (d *GoodsDao) ViewGoods() ([]model.Goods, error) {
 			return nil, err
 		}
 		goodses = append(goodses, goods)
-	}
-	return goodses, err
+	}*/
+	//预加载出店铺
+	result := GormDB.Preload("Store").Find(&goodses)
+	return goodses, result.Error
 }
 
 // SelectGoodsesByName 根据商品关键字选择查看商品

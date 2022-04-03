@@ -123,6 +123,7 @@ func viewGoods(ctx *gin.Context) {
 		goodses, err = gs.ViewGoods()
 		if err != nil {
 			fmt.Println("view goods err:", err)
+			tool.RespInternalError(ctx)
 			return
 		}
 	}

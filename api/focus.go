@@ -35,7 +35,7 @@ func addFocus(ctx *gin.Context) {
 	}
 
 	//验证goodsId
-	if iGoodsId != "" {
+	if iGoodsId != "" && iStoreId == "" {
 		goodsId, err := strconv.Atoi(iGoodsId)
 		if err != nil {
 			fmt.Println("goodsId to int err:", err)
@@ -62,10 +62,10 @@ func addFocus(ctx *gin.Context) {
 	}
 
 	//验证storeId
-	if iStoreId != "" {
-		storeId, err := strconv.Atoi(iGoodsId)
+	if iStoreId != "" && iGoodsId == "" {
+		storeId, err := strconv.Atoi(iStoreId)
 		if err != nil {
-			fmt.Println("goodsId to int err:", err)
+			fmt.Println("storeId to int err:", err)
 			tool.RespErrorWithData(ctx, "store_id无效")
 			return
 		}

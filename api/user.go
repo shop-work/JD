@@ -381,7 +381,7 @@ func login(ctx *gin.Context) {
 		return
 	}
 	//创建token,有效期5分钟
-	tokenString, err := service.CreateToken(basicUserinfo, 300, "TOKEN")
+	tokenString, err := service.CreateToken(basicUserinfo, 3000, "TOKEN")
 	if err != nil {
 		fmt.Println("create token err:", err)
 		tool.RespInternalError(ctx)
